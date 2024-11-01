@@ -1,0 +1,1 @@
+const VETOR = [2, 3, ]
