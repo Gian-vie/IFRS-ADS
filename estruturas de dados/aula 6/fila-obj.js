@@ -29,6 +29,7 @@ class Queue {
         }
         const result = this.items[0];
         delete this.items[0];
+        this.count-- // acho q era isso q estava fatando
         return result;
     }// NAO TA FUNCIONANDO (como deveria)
 
