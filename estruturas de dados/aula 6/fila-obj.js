@@ -32,6 +32,8 @@ class Queue {
         this.count-- // acho q era isso q estava fatando
         return result;
     }// NAO TA FUNCIONANDO (como deveria)
+  
+
 
     peek() {
         if (this.isEmpty()) {
