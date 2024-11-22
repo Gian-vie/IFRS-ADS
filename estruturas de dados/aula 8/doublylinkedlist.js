@@ -40,7 +40,7 @@ class DoublyLinkedList {
                     this.next = null;
                 }
             } else if (index === (this.size - 1)) {
-                current = this.tail
+                current = this.tail //guarda o valor para o return
                 this.tail = current.previous;// atribui a tail o valor anterior a ela
                 this.tail.next = null;
             } else {
@@ -60,7 +60,7 @@ class DoublyLinkedList {
     getElementAt(index) {
         if (index >= 0 && index <= this.count) {
             let node = this.head;
-            for (let i = 0; i < index && node != null; i++) {
+            for (let i = 0; i < index; i++) {
                 node = node.next;
             }
             return node;
