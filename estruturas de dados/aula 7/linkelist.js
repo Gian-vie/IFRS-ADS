@@ -1,12 +1,12 @@
 
 //lisatas ligadas
-export class Node {
-    constructor(element) {
-        this.element = element;
-        this.next = undefined;
-    }
-}
-
+// export class Node {
+//     constructor(element) {
+//         this.element = element;
+//         this.next = undefined;
+//     }
+// }
+const Node = require("./node")
 
 export class LinkedList {
 
