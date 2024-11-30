@@ -23,8 +23,10 @@ posteriormente há a comparação entre a entrada e saida de dados com base nos 
         if (vet1[i] == 1) {// se entra (1) valor, o valor do vetor 2 cai no array "entrada"
             entrada[entrada.length] = vet2[i] // o "entrada.lenght" deveria retornar "0" 
         } else if (vet1[i] == 2) {// se sai (2) valor, o valor do vetor 2 cai no array "saida"
+            saida[saida.length] = vet2[i]
         }
-    };//declarei algo errado nessa parte, não esta funcionando como achei que iria ;-; 
+    }//declarei algo errado nessa parte, não esta funcionando como achei que iria ;-; 
+
     let estrutura = [//só pra copiar as estruturas depois
         "queue",
         "not sure",
