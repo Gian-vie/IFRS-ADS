@@ -63,6 +63,7 @@ class BinarySearchTree {
     }
     max() {
         if(this._root === null){
+        if (this._root === null) {
             return undefined
         }
         return this.maxNode(this.root);
@@ -75,7 +76,11 @@ class BinarySearchTree {
         }
         return current._key;
     }
+
     min() {
+        if(this._root === null){
+            return undefined;
+        }
         return this.minNode(this._root);
     }
 
@@ -89,8 +94,35 @@ class BinarySearchTree {
 
     especifico(){
         
+    especific(key) {
+        if(this._root === null){
+            return undefined;
+        }
+        return this.especificNode(key);
     }
 
+    insertNode(node, key) {
+        if (node._key > key) {
+            if (node._left == null) {
+                node._left = new Node(key);
+            } else {
+                this.insertNode(node._left, key);
+            }
+        } else {
+            if (node._right == null) {
+                node._right = new Node(key);
+            } else {
+                this.insertNode(node._right, key);
+            }
+        }
+    }
+    especificNode(key) {
+        if(key === this._key){
+            return this._key
+        } else if(key > this._key){
+            
+        }
+    }
 }
 
 const tree = new BinarySearchTree();
@@ -109,6 +141,7 @@ tree.insert(20);
 tree.insert(25);
 tree.insert(18);
 const printNode1 = (value) => console.log(value+"aaa"); //função callback
+const printNode1 = (value) => console.log(value + "aaa"); //função callback
 const printNode = (value) => console.log(value); //função callback
 
 
