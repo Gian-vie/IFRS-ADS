@@ -62,7 +62,6 @@ class BinarySearchTree {
         }
     }
     max() {
-        if(this._root === null){
         if (this._root === null) {
             return undefined
         }
@@ -92,8 +91,6 @@ class BinarySearchTree {
         return current._key;
     }
 
-    especifico(){
-        
     especific(key) {
         if(this._root === null){
             return undefined;
@@ -140,7 +137,6 @@ tree.insert(14);
 tree.insert(20);
 tree.insert(25);
 tree.insert(18);
-const printNode1 = (value) => console.log(value+"aaa"); //função callback
 const printNode1 = (value) => console.log(value + "aaa"); //função callback
 const printNode = (value) => console.log(value); //função callback
 
