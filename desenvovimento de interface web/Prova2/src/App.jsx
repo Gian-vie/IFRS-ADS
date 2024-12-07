@@ -4,6 +4,8 @@ import Home from './pages/Home';
 import ProductsAdmin from './pages/ProductsAdmin';
 import ProductDetails from './pages/ProductDetails';
 import AddProduct from './pages/AddProduct';
+import './App.css';
+
 
 function App() {
   return (

@@ -3,9 +3,9 @@ import Home from './Home';
 import ProductList from './productList';
 import ProductDetails from './ProductDetails';
 import AddProduct from './AddProducts';
-import EditProduct from './EditProduct';
-import Footer from './components/Footer';
-import Header from './components/Header';
+// import EditProduct from './EditProduct';
+// import Footer from './components/Footer';
+// import Header from './components/Header';
 
 function App() {
   return (
