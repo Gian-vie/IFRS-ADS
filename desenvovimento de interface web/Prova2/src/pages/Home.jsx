@@ -1,5 +1,4 @@
-import React from 'react';
-import styles from './Home.module.css';
+import { link } from 'react-router-dom'
 
 
 function Home() {
@@ -7,6 +6,9 @@ function Home() {
     <div>
       <h1>Bem-vindo à Admin Store!</h1>
       <p>Gerencie seus produtos de maneira fácil e prática.</p>
+      <div>
+        <Link to="/admin">Administração</Link>
+      </div>
     </div>
   );
 }

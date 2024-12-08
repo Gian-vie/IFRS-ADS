@@ -16,7 +16,7 @@ function ProductDetails() {
 
   return (
     <div>
-      <img src={product.image} alt={product.title} style={{ width: '200px' }} />
+      <img src={product.image} alt={product.title} />
       <h1>{product.title}</h1>
       <p>{product.description}</p>
       <p>Categoria: {product.category}</p>

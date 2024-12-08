@@ -25,11 +25,11 @@ function AddProduct() {
     <div>
       <h1>Adicionar Produto</h1>
       <form onSubmit={handleSubmit}>
-        <input name="title" placeholder="Nome" onChange={handleChange} required />
-        <input name="price" placeholder="Preço" onChange={handleChange} required />
-        <input name="description" placeholder="Descrição" onChange={handleChange} required />
-        <input name="image" placeholder="URL da Imagem" onChange={handleChange} required />
-        <input name="category" placeholder="Categoria" onChange={handleChange} required />
+        <input name="title" placeholder="Nome" onChange={handleChange} required /><br />
+        <input name="price" placeholder="Preço" onChange={handleChange} required /><br />
+        <input name="description" placeholder="Descrição" onChange={handleChange} required /><br />
+        <input name="image" placeholder="URL da Imagem" onChange={handleChange} required type='url' /><br />
+        <input name="category" placeholder="Categoria" onChange={handleChange} required  /><br />
         <button type="submit">Adicionar</button>
       </form>
     </div>

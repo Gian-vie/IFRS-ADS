@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
@@ -18,13 +18,13 @@ function ProductsAdmin() {
   }
 
   return (
-    <div>
+    <div className="productsAdmin">
       <h1>Administração de Produtos</h1>
       <Link to="/add-product">Adicionar Produto</Link>
       <ul>
         {products.map((product) => (
           <li key={product.id}>
-            <img src={product.image} alt={product.title} style={{ width: '50px' }} />
+            <img src={product.image} alt={product.title} className="imagemAdmin"/>
             <h3>{product.title}</h3>
             <p>R$ {product.price}</p>
             <Link to={`/product/${product.id}`}>Detalhes</Link>
