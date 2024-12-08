@@ -24,11 +24,13 @@ function ProductsAdmin() {
       <ul>
         {products.map((product) => (
           <li key={product.id}>
-            <img src={product.image} alt={product.title} className="imagemAdmin"/>
-            <h3>{product.title}</h3>
-            <p>R$ {product.price}</p>
-            <Link to={`/product/${product.id}`}>Detalhes</Link>
-            <button onClick={() => handleDelete(product.id)}>Excluir</button>
+            <div>
+              <img src={product.image} alt={product.title} className="imagemAdmin" />
+              <h3>{product.title}</h3>
+              <p>R$ {product.price}</p>
+              <Link to={`/product/${product.id}`}>Detalhes</Link>
+              <button onClick={() => handleDelete(product.id)}>Excluir</button>
+            </div>
           </li>
         ))}
       </ul>

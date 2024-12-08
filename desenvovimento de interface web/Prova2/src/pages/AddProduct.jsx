@@ -22,7 +22,7 @@ function AddProduct() {
   }
 
   return (
-    <div>
+    <div className='addProduct'>
       <h1>Adicionar Produto</h1>
       <form onSubmit={handleSubmit}>
         <input name="title" placeholder="Nome" onChange={handleChange} required /><br />

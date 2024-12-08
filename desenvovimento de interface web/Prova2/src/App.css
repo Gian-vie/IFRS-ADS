@@ -29,23 +29,23 @@ a:hover {
 /* Global Styles */
 body {
   font-family: Arial, sans-serif;
-  background-color: rgb(51, 95, 95);
+  background-color: rgb(72, 131, 131);
   color: #ffffff;
 }
 
-.appDiv div{
+.appDiv div {
   text-align: center;
-  margin: 40px;
+  margin: 30px;
 }
 
 a {
   margin: 10px;
   padding: 10px;
- border-radius: 8px;
+  border-radius: 8px;
   background-color: rgb(108, 197, 197);
   text-decoration: none;
   border: black;
-  color:black;
+  color: black;
 }
 
 a:hover {
@@ -56,21 +56,26 @@ a:hover {
 
 main {
   padding: 20px;
-  margin-bottom: 50px; /* Espaço para evitar sobreposição do footer */
+  margin-bottom: 50px;
+  /* Espaço para evitar sobreposição do footer */
 }
 
 /* Header Styles */
 header {
   border: black;
+  width: 100%;
   background-color: #282c34;
-  color: rgb(255, 0, 0);
+  color: rgb(221, 214, 214);
   padding: 10px 20px;
-  margin-top: 0%;
+  top: 0;
   text-align: center;
+  position: fixed;
+
 }
 
-header nav{
+header nav a{
   text-align: center;
+  color: #000000;
 }
 
 header nav a:hover {
@@ -87,28 +92,28 @@ footer {
   bottom: 0;
   width: 100%;
   font-size: 14px;
-  
+
 }
 
 footer p {
   margin: 5px 0;
-  color:rgb(255, 255, 255)
+  color: rgb(255, 255, 255)
 }
 
 /* Home Page Styles */
 .home {
   text-align: center;
+  justify-content: space-evenly;
   margin: 20px;
 }
 
 .home h1 {
-  font-size: 2.5rem;
-  color: #333;
+  color: #ffffff;
 }
 
 .home p {
   font-size: 1.2rem;
-  color: #555;
+  color: #ffffff;
   margin-top: 10px;
 }
 
@@ -118,8 +123,9 @@ footer p {
 }
 
 .productsAdmin h1 {
+  margin-top: 60px;
   font-size: 2rem;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   color: #ddd;
 }
 
@@ -129,30 +135,30 @@ footer p {
 }
 
 .productsAdmin li {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  display:flex;
+  justify-content: space-evenly;
   padding: 10px;
+  width: 50%;
   border: 1px solid #ddd;
   border-radius: 5px;
   margin-bottom: 10px;
-  background-color: rgb(108, 197, 197);
+  background-color: rgb(56, 104, 104);
 }
 
 .productsAdmin img {
-  width: 50px;
-  height: 50px;
+  width: 70px;
+  height: 70px;
   object-fit: contain;
 }
 
 .productsAdmin h3 {
   margin: 0;
   font-size: 1.2rem;
-  color: #333;
+  color: #eeeeee;
 }
 
 .productsAdmin p {
-  margin: 0;
+  margin: 5px;
   font-size: 1rem;
   color: #ffffff;
 }
@@ -171,25 +177,26 @@ footer p {
 }
 
 .productsAdmin a {
-  margin-left: 10px;
-  color: #007bff;
+  justify-content: space-evenly;
+  align-items: center;
+  border: 1px solid #000000;
+  color: #000000;
+  position: static;
   text-decoration: none;
+
 }
 
 .productsAdmin a:hover {
+  border: 1px solid #000000;
   color: white;
-  background-color: rgb(56, 104, 104);}
-
-/* ProductDetails Page Styles */
-.productDetails {
-  margin: 20px;
+  background-color: rgb(56, 104, 104);
 }
 
+/* ProductDetails Page Styles */
 .productDetails img {
   width: 200px;
   height: 200px;
   object-fit: contain;
-  margin-bottom: 20px;
 }
 
 .productDetails h1 {
@@ -218,6 +225,7 @@ footer p {
 }
 
 .addProduct input {
+  background-color: rgb(0, 0, 0, 0.5);
   margin-bottom: 10px;
   padding: 10px;
   border: 1px solid #ddd;

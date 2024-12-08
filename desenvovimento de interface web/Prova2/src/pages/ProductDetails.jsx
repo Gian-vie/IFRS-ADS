@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
@@ -15,8 +15,8 @@ function ProductDetails() {
   if (!product) return <p>Carregando...</p>;
 
   return (
-    <div>
-      <img src={product.image} alt={product.title} />
+    <div className='productDetails'>
+      <img src={product.image} alt={product.title} style={{ width: '200px' }} />
       <h1>{product.title}</h1>
       <p>{product.description}</p>
       <p>Categoria: {product.category}</p>
