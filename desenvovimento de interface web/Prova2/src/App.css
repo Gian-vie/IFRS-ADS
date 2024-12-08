@@ -36,6 +36,7 @@ body {
 .appDiv div {
   text-align: center;
   margin: 30px;
+  height: 90%;
 }
 
 a {
@@ -62,10 +63,8 @@ main {
 
 /* Header Styles */
 header {
-  border: black;
   width: 100%;
   background-color: #282c34;
-  color: rgb(221, 214, 214);
   padding: 10px 20px;
   top: 0;
   text-align: center;
@@ -108,6 +107,7 @@ footer p {
 }
 
 .home h1 {
+  margin-top: 200px;
   color: #ffffff;
 }
 
@@ -138,7 +138,6 @@ footer p {
   display:flex;
   justify-content: space-evenly;
   padding: 10px;
-  width: 50%;
   border: 1px solid #ddd;
   border-radius: 5px;
   margin-bottom: 10px;
@@ -159,6 +158,7 @@ footer p {
 
 .productsAdmin p {
   margin: 5px;
+  margin-bottom: 10px;
   font-size: 1rem;
   color: #ffffff;
 }
@@ -174,6 +174,63 @@ footer p {
 
 .productsAdmin button:hover {
   background-color: #ff7875;
+}
+
+.updateProductContainer input {
+  background-color: rgb(0, 0, 0, 0.5);
+  margin-bottom: 10px;
+  padding: 10px;
+  width: 100px;;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.updateProductContainer {
+  margin: 20px;
+}
+
+.labelDescrição textarea{
+width: 210px;
+height: 60px;
+align-items:end;
+background-color: rgb(0, 0, 0, 0.5);
+color: #ddd;
+border-radius: 5px ;
+}
+
+.updateProductContainer h2 {
+  margin-top: 70px;
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.updateProductContainer form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.updateProductContainer input {
+  color:#ddd;
+  background-color: rgb(0, 0, 0, 0.5);
+  margin-bottom: 10px;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.updateProductContainer button {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.updateProductContainer button:hover {
+  background-color: #45a049;
 }
 
 .productsAdmin a {
@@ -194,6 +251,7 @@ footer p {
 
 /* ProductDetails Page Styles */
 .productDetails img {
+  margin-top: 70px;
   width: 200px;
   height: 200px;
   object-fit: contain;
@@ -205,8 +263,9 @@ footer p {
 }
 
 .productDetails p {
+  margin-right: 200px;
+  margin-left: 200px;
   font-size: 1rem;
-  margin-bottom: 5px;
 }
 
 /* AddProduct Page Styles */
@@ -215,6 +274,7 @@ footer p {
 }
 
 .addProduct h1 {
+  margin-top: 50px;
   font-size: 2rem;
   margin-bottom: 20px;
 }
@@ -222,11 +282,14 @@ footer p {
 .addProduct form {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .addProduct input {
+  color: #ddd;
   background-color: rgb(0, 0, 0, 0.5);
   margin-bottom: 10px;
+  width: 50%;
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 5px;

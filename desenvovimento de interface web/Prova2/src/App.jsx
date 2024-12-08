@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Home from './pages/Home';
 import ProductsAdmin from './pages/ProductsAdmin';
 import ProductDetails from './pages/ProductDetails';
+import UpdateProduct from './pages/updateProducts';
 import AddProduct from './pages/AddProduct';
 import './App.css';
 
@@ -19,11 +20,12 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/admin" element={<ProductsAdmin />} />
+          <Route path="/update-product/:id" element={<UpdateProduct />} />
           <Route path="/product/:id" element={<ProductDetails />} />
           <Route path="/add-product" element={<AddProduct />} />
         </Routes>
         <footer>
-          <p>Admin Store - Gerencie seus produtos de maneira fácil e prática!</p>
+          <p>© 2024 Meu Website. Todos os direitos reservados.</p>
         </footer>
       </Router>
     </div>

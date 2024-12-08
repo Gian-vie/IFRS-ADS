@@ -10,7 +10,7 @@ function ProductsAdmin() {
       .then((response) => setProducts(response.data))
       .catch((error) => console.error('Erro ao buscar produtos:', error));
   }, []);
-
+ 
   function handleDelete(id) {
     axios.delete(`https://fakestoreapi.com/products/${id}`)
       .then(() => setProducts(products.filter((product) => product.id !== id)))
@@ -28,6 +28,7 @@ function ProductsAdmin() {
               <img src={product.image} alt={product.title} className="imagemAdmin" />
               <h3>{product.title}</h3>
               <p>R$ {product.price}</p>
+              <Link to={`/update-product/${product.id}`}>Update</Link>
               <Link to={`/product/${product.id}`}>Detalhes</Link>
               <button onClick={() => handleDelete(product.id)}>Excluir</button>
             </div>

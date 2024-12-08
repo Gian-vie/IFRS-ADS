@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link} from 'react-router-dom';
 import axios from 'axios';
 
 function ProductDetails() {
@@ -21,6 +21,8 @@ function ProductDetails() {
       <p>{product.description}</p>
       <p>Categoria: {product.category}</p>
       <p>Preço: R$ {product.price}</p>
+      <Link to="/admin">retornar</Link>
+
     </div>
   );
 }
