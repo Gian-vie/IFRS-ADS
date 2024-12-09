@@ -7,7 +7,6 @@ class Node {
 }
 module.exports = Node;
 
-
 class BinarySearchTree {
     constructor() {
         this._root = null;
@@ -37,7 +36,6 @@ class BinarySearchTree {
         }
     }
 
-
     inOrderTraverse(callback) {
         this.inOrderTraverseNode(this._root, callback);
     }
@@ -61,6 +59,7 @@ class BinarySearchTree {
             this.preOrderTraverseNode(node._right, callback);
         }
     }
+
     max() {
         if (this._root === null) {
             return undefined
@@ -77,7 +76,7 @@ class BinarySearchTree {
     }
 
     min() {
-        if(this._root === null){
+        if (this._root === null) {
             return undefined;
         }
         return this.minNode(this._root);
@@ -88,38 +87,68 @@ class BinarySearchTree {
         while (current != null && current._left != null) {
             current = current._left;
         }
-        return current._key;
+        return current;
     }
 
-    especific(key) {
-        if(this._root === null){
-            return undefined;
+    //busca para saber se o valor existe na arvore
+    search(key) {
+        return this.searchNode(this._root, key);
+    }
+
+    searchNode(node, key) {
+        if (node == null) {
+            return false;
         }
-        return this.especificNode(key);
-    }
-
-    insertNode(node, key) {
         if (node._key > key) {
-            if (node._left == null) {
-                node._left = new Node(key);
-            } else {
-                this.insertNode(node._left, key);
-            }
+            return this.searchNode(node._left, key);
+        } else if (node._key < key) {
+            return this.searchNode(node._right, key);
         } else {
-            if (node._right == null) {
-                node._right = new Node(key);
-            } else {
-                this.insertNode(node._right, key);
+            return true;
+        }
+    }
+    remove(key) {
+        const node = this.removeNode(this._root, key);
+        if(node){
+            console.log(node._left._right)
+        } else {
+            console.log("n encontrado")
+        }
+    }
+
+    removeNode(node, key) {
+        if (node == null) {
+            return null;
+        }
+        if (node._key > key) {
+            node._left = this.removeNode(node._left, key);
+            return node;
+        } else if (node._key < key) {
+            node._right = this.removeNode(node._right, key);
+            return node;
+        } else {
+            // cenario 1             
+            if (node._left == null && node._right == null) {
+                node = null;
+                return node;
             }
+            // cenario 2
+            if (node._left == null) {
+                node = node._right;
+                return node;
+            } else if (node._right == null) {
+                node = node._left;
+                return node;
+            }
+            // cenario 3
+            const aux = this.minNode(node._right);
+            node._key = aux._key;
+            node._right = this.removeNode(node._right, aux._key);
+            return node;
         }
     }
-    especificNode(key) {
-        if(key === this._key){
-            return this._key
-        } else if(key > this._key){
-            
-        }
-    }
+
+
 }
 
 const tree = new BinarySearchTree();
@@ -137,11 +166,18 @@ tree.insert(14);
 tree.insert(20);
 tree.insert(25);
 tree.insert(18);
-const printNode1 = (value) => console.log(value + "aaa"); //função callback
+// const printNode1 = (value) => console.log(value + "aaa"); //função callback
 const printNode = (value) => console.log(value); //função callback
 
 
-tree.inOrderTraverse(printNode1)
+// tree.inOrderTraverse(printNode1)
 tree.preOrderTraverse(printNode)
 
-
+// console.log(tree.search(25))
+// console.log(tree.remove(25))
+// console.log(tree.search(25))
+tree.search(15)
+tree.remove(15)
+console.log(tree.min())
+tree.search(15)
+tree.preOrderTraverse(printNode)

@@ -44,7 +44,7 @@ class stack{
             return ``;
         }
         let objString = `${this._items[0]}`;
-        for (let i = 0; i < this._count; i++){
+        for (let i = 1; i < this._count; i++){
             objString = `${objString},${this._items[i]}`;
         }
         return objString;
