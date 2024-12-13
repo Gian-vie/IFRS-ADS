@@ -19,13 +19,13 @@ function AddProduct() {
     axios.post('https://fakestoreapi.com/products', formData)
     .then(() => {
       alert('Produto adicionado com sucesso!')
-      handleChange({ // Redefinir o estado do formulário
-        title: '',
-        price: '',
-        description: '',
-        image: '',
-        category: '',
-      });
+      // useState({ // Redefinir o estado do formulário
+      //   title: '',
+      //   price: '',
+      //   description: '',
+      //   image: '',
+      //   category: '',
+      // });
     })
     .catch((error) => {
       console.error('Erro ao adicionar produto:', error);
