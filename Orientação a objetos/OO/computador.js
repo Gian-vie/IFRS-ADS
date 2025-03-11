@@ -1,4 +1,3 @@
-"use strict";
 /*
 CLasse computador
 atributos:
@@ -20,10 +19,8 @@ abrirProgramas()
 fecharProgramas()
 programasAbertos()
 */
-exports.__esModule = true;
-exports.Computador = void 0;
-var Computador = /** @class */ (function () {
-    function Computador() {
+export class Computador {
+    constructor() {
         this.programasAbertos = new Array();
         this.computadorLigado = false;
         //     this.marca = "0";
@@ -35,13 +32,13 @@ var Computador = /** @class */ (function () {
         //     this.PlacVideoIntegrada = true;
         //     this.qtdMemoriaPlacaVideo = 0;
     }
-    Computador.prototype.carregarBios = function () {
+    carregarBios() {
         console.log("...carregando bios");
-    };
-    Computador.prototype.carregarSO = function (so) {
-        console.log("Carregando S.O. ".concat(so));
-    };
-    Computador.prototype.ligarDesligar = function () {
+    }
+    carregarSO(so) {
+        console.log(`Carregando S.O. ${so}`);
+    }
+    ligarDesligar() {
         if (this.computadorLigado == false) {
             this.carregarBios();
             console.log("computador ligado");
@@ -49,11 +46,11 @@ var Computador = /** @class */ (function () {
         }
         console.log("computador desligado");
         this.computadorLigado = !this.computadorLigado;
-    };
-    Computador.prototype.abrirProgramas = function (programa, memRAM) {
+    }
+    abrirProgramas(programa, memRAM) {
         if (this.computadorLigado == true) {
             if (this.capacidadeRAM > memRAM) {
-                console.log("Abrindo programa ".concat(programa));
+                console.log(`Abrindo programa ${programa}`);
                 this.programasAbertos.push(programa);
                 this.capacidadeRAM -= memRAM;
                 return true;
@@ -62,13 +59,13 @@ var Computador = /** @class */ (function () {
             return false;
         }
         return false;
-    };
-    Computador.prototype.fecharProgramas = function (programa, memRAM) {
-        var index = this.programasAbertos.findIndex(function (p) { return p === programa; });
+    }
+    fecharProgramas(programa, memRAM) {
+        const index = this.programasAbertos.findIndex(p => p === programa);
         if (this.computadorLigado == true) {
             if (index !== -1) {
-                console.log("Fechando programa ".concat(programa));
-                this.programasAbertos = this.programasAbertos.filter(function (p) { return p != programa; });
+                console.log(`Fechando programa ${programa}`);
+                this.programasAbertos = this.programasAbertos.filter((p) => p != programa);
                 this.capacidadeRAM += memRAM;
                 // delete this.programasAbertos[index]
                 return true;
@@ -77,16 +74,14 @@ var Computador = /** @class */ (function () {
             return false;
         }
         return false;
-    };
-    Computador.prototype.listarProgramasAbertos = function () {
+    }
+    listarProgramasAbertos() {
         if (this.computadorLigado == true) {
             console.log(this.programasAbertos);
         }
-    };
-    return Computador;
-}());
-exports.Computador = Computador;
-var comp1 = new Computador();
+    }
+}
+let comp1 = new Computador();
 comp1.marca = "DELL";
 comp1.capacidadeHD = 1024;
 comp1.capacidadeRAM = 32;
