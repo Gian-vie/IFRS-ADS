@@ -20,7 +20,7 @@ fecharProgramas()
 programasAbertos()
 */
 
-export class Computador {
+class Computador {
   marca: string;
   capacidadeHD: number;
   capacidadeRAM: number;
@@ -53,14 +53,16 @@ export class Computador {
     console.log(`Carregando S.O. ${so}`);
   }
 
-  ligarDesligar() {
+  ligarDesligar(): boolean{
     if (this.computadorLigado == false) {
       this.carregarBios();
       console.log("computador ligado");
       this.computadorLigado = !this.computadorLigado;
+      return true
     }
     console.log("computador desligado");
     this.computadorLigado = !this.computadorLigado;
+    return false
   }
 
   abrirProgramas(programa: string, memRAM: number): boolean {
@@ -78,7 +80,7 @@ export class Computador {
   }
 
   fecharProgramas(programa: string, memRAM: number): boolean {
-    const index = this.programasAbertos.findIndex(p => p === programa);
+    const index = this.programasAbertos.findIndex((p) => p === programa);
     if (this.computadorLigado == true) {
       if (index !== -1) {
         console.log(`Fechando programa ${programa}`);
@@ -102,6 +104,10 @@ export class Computador {
   }
 }
 
+module.exports = Computador;
+
+
+
 let comp1 = new Computador();
 
 comp1.marca = "DELL";
@@ -114,13 +120,10 @@ comp1.ligarDesligar();
 comp1.abrirProgramas("Visual Studio Code", 2);
 comp1.abrirProgramas("Crhome", 20);
 comp1.abrirProgramas("Opera", 15);
-comp1.listarProgramasAbertos()
+comp1.listarProgramasAbertos();
 comp1.fecharProgramas("firefox", 0);
 comp1.fecharProgramas("Crhome", 20);
-comp1.fecharProgramas("Opera", 15);
 comp1.ligarDesligar();
-comp1.abrirProgramas("Crhome", 20);
-
 
 // let comp2 = new Computador();
 
