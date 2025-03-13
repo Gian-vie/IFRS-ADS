@@ -1,0 +1,46 @@
+virtualbox do ubuntu
+USER:
+    gian
+
+SENHA:
+    gianubuntu
+    giankali
+
+
+sudo apt udate  = verifica se tem updates
+sudo apt upgrade -y  = instala os upgrades
+
+sudo = executa como adm
+
+sudo shutdown -h now  = desliga a maquina
+
+ls = lista local do arquivo
+ls -l = lista os arquivos na pasta
+
+nano <nome da pasta> = cria ou abre uma pasta
+(ctrl+0 = salva)
+(cntrl+x = sai)
+
+cat <nome> = abre um arquivo de texto
+
+wc = efetua contagens
+
+mkdir <nome do diretório> = cria diretório
+
+rmdir <nome do diretório> = exclui diretório
+
+cd <nome do diretório> = entra no diretório
+
+pwd = mostra todo o caminho
+
+cp <arquivo a ser copiado> <local q vai ser colado> = copia um arquivo
+
+cp <arquivo a ser movido> <local q vai ser colocado> = move um arquivo
+
+
+
+
+
+
+
+
