@@ -20,7 +20,9 @@ fecharProgramas()
 programasAbertos()
 */
 
-class Computador {
+import { Software } from "./softweres";
+
+export class Computador {
   marca: string;
   capacidadeHD: number;
   capacidadeRAM: number;
@@ -31,6 +33,7 @@ class Computador {
   qtdMemoriaPlacaVideo: number;
   programasAbertos: string[];
   computadorLigado: boolean;
+  softweresInstalados: Software[];
 
   constructor() {
     this.programasAbertos = new Array();
@@ -45,6 +48,12 @@ class Computador {
     //     this.qtdMemoriaPlacaVideo = 0;
   }
 
+  instalarSoftwere(sw: Software) {
+    if (sw != null) {
+      this.softweresInstalados.push(sw);
+    }
+  }
+
   carregarBios() {
     console.log("...carregando bios");
   }
@@ -53,21 +62,22 @@ class Computador {
     console.log(`Carregando S.O. ${so}`);
   }
 
-  ligarDesligar(): boolean{
+  ligarDesligar(): boolean {
     if (this.computadorLigado == false) {
       this.carregarBios();
       console.log("computador ligado");
       this.computadorLigado = !this.computadorLigado;
-      return true
+      return true;
     }
     console.log("computador desligado");
     this.computadorLigado = !this.computadorLigado;
-    return false
+    return false;
   }
 
   abrirProgramas(programa: string, memRAM: number): boolean {
     if (this.computadorLigado == true) {
-      if (this.capacidadeRAM > memRAM) {
+      const index = this.softweresInstalados.findIndex(p =>p.nome === programa)
+      if (this.capacidadeRAM > memRAM && index > 0) {
         console.log(`Abrindo programa ${programa}`);
         this.programasAbertos.push(programa);
         this.capacidadeRAM -= memRAM;
@@ -104,35 +114,4 @@ class Computador {
   }
 }
 
-module.exports = Computador;
-
-
-
-let comp1 = new Computador();
-
-comp1.marca = "DELL";
-comp1.capacidadeHD = 1024;
-comp1.capacidadeRAM = 32;
-comp1.freqProcessador = 3.5;
-comp1.qntNucleosProcessador = 8;
-comp1.PlacVideoIntegrada = true;
-comp1.ligarDesligar();
-comp1.abrirProgramas("Visual Studio Code", 2);
-comp1.abrirProgramas("Crhome", 20);
-comp1.abrirProgramas("Opera", 15);
-comp1.listarProgramasAbertos();
-comp1.fecharProgramas("firefox", 0);
-comp1.fecharProgramas("Crhome", 20);
-comp1.ligarDesligar();
-
-// let comp2 = new Computador();
-
-// comp2.marca = "Apple";
-// comp2.capacidadeHD = 1000;
-// comp2.capacidadeRAM = 16;
-// comp2.freqProcessador = 3.8;
-// comp2.qntNucleosProcessador = 8;
-// comp2.PlacVideoIntegrada = false;
-// comp2.qtdMemoriaPlacaVideo = 6;
-// comp2.ligar();
-// comp2.abrirProgramas("Safari", 0.5);
+// module.exports = Computador;

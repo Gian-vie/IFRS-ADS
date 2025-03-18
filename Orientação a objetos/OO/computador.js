@@ -1,3 +1,4 @@
+"use strict";
 /*
 CLasse computador
 atributos:
@@ -19,6 +20,8 @@ abrirProgramas()
 fecharProgramas()
 programasAbertos()
 */
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Computador = void 0;
 var Computador = /** @class */ (function () {
     function Computador() {
         this.programasAbertos = new Array();
@@ -84,7 +87,8 @@ var Computador = /** @class */ (function () {
     };
     return Computador;
 }());
-module.exports = Computador;
+exports.Computador = Computador;
+// module.exports = Computador;
 var comp1 = new Computador();
 comp1.marca = "DELL";
 comp1.capacidadeHD = 1024;
