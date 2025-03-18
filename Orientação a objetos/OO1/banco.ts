@@ -8,7 +8,7 @@ export class Cliente {
   codigo: string;
   nome: string;
 
-  constructor(codigo:string, nome: string) {
+  constructor(codigo: string, nome: string) {
     this.codigo = codigo;
     this.nome = nome;
   }
@@ -99,20 +99,20 @@ limite: $${this.limite.toFixed(2)}`;
     return `Saldo disponivel de $${(this.saldo + this.limite).toFixed(2)}`;
   }
 
-  transferencia(conta:Conta, valor: number):boolean{
-    if(valor < this.saldo + this.limite){
-        if (valor > this.saldo) {
-            this.saldo -= valor;
-            this.limite += this.saldo;
-            this.saldo = 0;
-            conta.saldo += valor
-            return true;
-          }
-          this.saldo -= valor;
-          conta.saldo += valor
-          return true;
+  transferencia(conta: Conta, valor: number): boolean {
+    if (valor < this.saldo + this.limite) {
+      if (valor > this.saldo) {
+        this.saldo -= valor;
+        this.limite += this.saldo;
+        this.saldo = 0;
+        conta.saldo += valor;
+        return true;
+      }
+      this.saldo -= valor;
+      conta.saldo += valor;
+      return true;
     }
-    return false
+    return false;
   }
 }
 
@@ -121,7 +121,7 @@ const cont2 = new Conta("3031", 2000, agen1);
 
 console.log(cont1.tirarExtrato());
 console.log(cont2.tirarExtrato());
-cont1.transferencia(cont2, 1200)
+cont1.transferencia(cont2, 1200);
 console.log(cont1.tirarExtrato());
 console.log(cont2.tirarExtrato());
 cont1.sacar(550)
@@ -135,7 +135,7 @@ export class Funcionario {
   nome: string;
   salario: number;
 
-  constructor(nome, salario) {
+  constructor(nome: string, salario: number) {
     this.nome = nome;
     this.salario = salario;
   }
@@ -154,7 +154,7 @@ export class Funcionario {
 
 // 2) Defina um vínculo entre os objetos que representam as agências e os objetos que representam os contas. Para isso, você deve alterar a classe Conta. Teste o relacionamento entre contas e agências.
 
-// 4) Acrescente um construtor na classe Agencia para receber um número como parâmetro. 
+// 4) Acrescente um construtor na classe Agencia para receber um número como parâmetro.
 
 // 5) Acrescente um construtor na classe CartaoDeCredito para receber um número como parâmetro.
 
