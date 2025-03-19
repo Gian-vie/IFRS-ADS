@@ -1,0 +1,24 @@
+@baseURL = http://localhost:3000/
+
+### Teste da rota GET /produtos
+GET {{baseURL}}/produtos
+
+### Teste da rota POST /produtos
+POST {{baseURL}}/produtos
+Content-Type: application/json
+
+{
+ "nome": "Novo Produto",
+ "preco": 100.0
+}
+
+### Teste da rota PUT /produtos/:id
+PUT {{baseURL}}/produtos/1
+Content-Type: application/json
+
+{
+ "nome": "Produto Atualizado",
+ "preco": 150.0
+}
+### Teste da rota DELETE /produtos/:id
+DELETE {{baseURL}}/produtos/1
