@@ -37,10 +37,7 @@ cp <arquivo a ser copiado> <local q vai ser colado> = copia um arquivo
 
 cp <arquivo a ser movido> <local q vai ser colocado> = move um arquivo
 
+ps -gaux | grep firefox = mostra os processor rodando 
 
-
-
-
-
-
+ps -gaux | grep firefox | wc -l  = mostra o numero de processos abertos
 
