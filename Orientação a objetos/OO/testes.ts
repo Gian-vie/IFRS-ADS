@@ -1,4 +1,6 @@
 import { Computador } from "./computador";
+import { Desktop } from "./desktop";
+import { Notebook } from "./notebook";
 import { Software } from "./softweres";
 
 let comp1 = new Computador();
@@ -18,13 +20,18 @@ comp1.fecharProgramas("firefox", 0);
 comp1.fecharProgramas("Crhome", 20);
 comp1.ligarDesligar();
 
-
 let sw1: Software = new Software("Windows 11", 11000, 2000);
 
 let sw2: Software = new Software("Libra Office", 3000, 700);
 
 let sw3: Software = new Software("Chome", 1500, 2000);
 
-comp1.instalarSoftwere(sw1)
-comp1.instalarSoftwere(sw2)
-comp1.instalarSoftwere(sw3)
+comp1.instalarSoftwere(sw1);
+comp1.instalarSoftwere(sw2);
+comp1.instalarSoftwere(sw3);
+
+let desk1 = new Desktop();
+desk1.ligarDesligar();
+
+let note1 = new Notebook();
+note1.ligarDesligar()
