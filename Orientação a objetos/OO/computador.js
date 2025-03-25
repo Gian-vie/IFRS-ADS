@@ -129,6 +129,7 @@ var Computador = /** @class */ (function () {
     Computador.prototype.ligarDesligar = function () {
         if (this._computadorLigado == false) {
             this.carregarBios();
+            this, this.carregarSO("Windows");
             console.log("computador ligado");
             this._computadorLigado = !this._computadorLigado;
             return true;
