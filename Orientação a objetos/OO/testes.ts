@@ -1,7 +1,9 @@
 import { Computador } from "./computador";
 import { Desktop } from "./desktop";
 import { Notebook } from "./notebook";
+import { SmartPhone } from "./smartphone";
 import { Software } from "./softweres";
+import { Tablet } from "./tablet";
 
 let comp1 = new Computador();
 
@@ -30,8 +32,14 @@ comp1.instalarSoftwere(sw1);
 comp1.instalarSoftwere(sw2);
 comp1.instalarSoftwere(sw3);
 
-let desk1 = new Desktop();
+let desk1: Desktop = new Desktop();
 desk1.ligarDesligar();
 
-let note1 = new Notebook();
-note1.ligarDesligar()
+let note1: Notebook = new Notebook();
+note1.ligarDesligar();
+
+let tab1: Tablet = new Tablet();
+tab1.ligarDesligar();
+
+let cell1: SmartPhone = new SmartPhone();
+cell1.ligarDesligar();
