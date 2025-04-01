@@ -1,5 +1,8 @@
 // 1) Defina uma classe para modelar os funcionários do banco. Sabendo que todo funcionário possui nome e salário, inclua os getters e setters dos atributos.
 
+//+++++++++++++++++++++++++++++++++++++
+//classes abstratas servem para classes que não serão declaradas, servem de base para demais classes
+// export abstract class Funcionario {
 export class Funcionario {
   private _nome: string;
   public get nome(): string {
@@ -17,28 +20,44 @@ export class Funcionario {
     this._salario = value;
   }
 
-  
+  //+++++++++++++++++++++++++++++++++++
   //protected permite acesso de classes filhas porém n de forma experna as classes
   protected _userName: string;
-  protected _senha: string; 
+  protected _senha: string;
+  protected _valeAlimentação: number;
+  protected static _valeAlimentação2: number;
+//   protected abstract _apelido: string;//atributo abstrato, se torna exigido nos outros assim como os metodos abstratos
 
   constructor(nome: string, salario: number) {
     this._nome = nome;
     this._salario = salario;
   }
+  //+++++++++++++++++++++++++++++++++++
+  // metodo abstrato
+  //NÂO possui codigo em si
+  //torna obrigatório nas classes filho
+//   abstract calcularValeAlimentação(): void;
 
-  aumentarSalario(): number{
-    this._salario += (this._salario * 10)/100
-    return this._salario
+  //só pode ser acessado dentro de um metodo statico
+  static setarValeAlimentação2(valorVA): void{
+    this._valeAlimentação2 = valorVA
+    //vai alterar o valor em todas as classes filhas.
+  };
+
+  aumentarSalario(): number {
+    this._salario += (this._salario * 10) / 100;
+    return this._salario;
   }
 
   calculaBonificacao(): number {
     this.salario = (this.salario * 10) / 100;
-    return this.salario
-}
+    return this.salario;
+  }
 
   consultarDados(): string {
-    return `Nome: ${this._nome}\n Salario: R$${this._salario.toFixed(2)} \n bonificação R$${this.calculaBonificacao()}`;
+    return `Nome: ${this._nome}\n Salario: R$${this._salario.toFixed(
+      2
+    )} \n bonificação R$${this.calculaBonificacao()}`;
   }
 }
 
@@ -47,22 +66,22 @@ export class Funcionario {
 // Os gerentes possuem um nome de usuário e uma senha para acessar o sistema do banco.
 
 export class Gerente extends Funcionario {
+  protected _apelido: string;////////////
+  //   private _userName: string;
+  //   public get userName(): string {
+  //     return this._userName;
+  //   }
+  //   public set userName(value: string) {
+  //     this._userName = value;
+  //   }
 
-//   private _userName: string;
-//   public get userName(): string {
-//     return this._userName;
-//   }
-//   public set userName(value: string) {
-//     this._userName = value;
-//   }
-
-//   private _senha: string;
-//  public get senha(): string {
-//     return this._senha;
-//   }
-//   public set senha(value: string) {
-//     this._senha = value;
-//   }
+  //   private _senha: string;
+  //  public get senha(): string {
+  //     return this._senha;
+  //   }
+  //   public set senha(value: string) {
+  //     this._senha = value;
+  //   }
 
   constructor(nome: string, salario: number, userName: string, senha: string) {
     super(nome, salario);
@@ -70,14 +89,19 @@ export class Gerente extends Funcionario {
     this._senha = senha;
   }
 
-  aumentarSalario(): number{
-    this.salario += (this.salario * 15)/100
-    return this.salario
+  calcularValeAlimentação() {
+      throw new Error("methodo erdado do pai obrigatóriamente") 
+      this._valeAlimentação = 1500
+  }
+
+  aumentarSalario(): number {
+    this.salario += (this.salario * 15) / 100;
+    return this.salario;
   }
 
   calculaBonificacao(): number {
     this.salario = (this.salario * 15) / 100;
-    return this.salario
+    return this.salario;
   }
 
   consultarDados(): string {
@@ -90,6 +114,7 @@ export class Gerente extends Funcionario {
 //   As telefonistas possuem um código de estação de trabalho.
 
 export class Telefonista extends Funcionario {
+  protected _apelido: string;/////////////
   private _stationCode: number;
   public get stationCode(): number {
     return this._stationCode;
@@ -102,6 +127,11 @@ export class Telefonista extends Funcionario {
     this._stationCode = stationCode;
   }
 
+  calcularValeAlimentação() {
+    throw new Error("methodo erdado do pai obrigatóriamente") 
+    this._valeAlimentação = 1300
+}
+
   consultarDados(): string {
     return `${super.consultarDados()} \n Staion Code: ${this._stationCode}`;
   }
@@ -110,17 +140,24 @@ export class Telefonista extends Funcionario {
 // As secretarias possuem um número de ramal.
 
 export class Secretaria extends Funcionario {
-  private _ramal: number;
-  public get ramal(): number {
-    return this._ramal;
-  }
-  public set ramal(value: number) {
-    this._ramal = value;
-  }
-  constructor(nome: string, salario: number, ramal) {
-    super(nome, salario);
-    this._ramal = ramal;
-  }
+    protected _apelido: string;/////////////
+    private _ramal: number;
+    public get ramal(): number {
+        return this._ramal;
+    }
+    public set ramal(value: number) {
+        this._ramal = value;
+    }
+    constructor(nome: string, salario: number, ramal) {
+        super(nome, salario);
+        this._ramal = ramal;
+    }
+    
+    
+    calcularValeAlimentação() {
+        throw new Error("Method not implemented.");
+        this._valeAlimentação = 3300
+    }
 
   consultarDados(): string {
     return `${super.consultarDados()} \n Ramal: ${this._ramal}`;
