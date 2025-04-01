@@ -20,24 +20,84 @@ fecharProgramas()
 programasAbertos()
 */
 
+// public -> default
+
 import { Software } from "./softweres";
 
 export class Computador {
-  marca: string;
-  capacidadeHD: number;
-  capacidadeRAM: number;
-  freqProcessador: number;
-  clockProcessador: number;
-  qntNucleosProcessador: number;
-  PlacVideoIntegrada: boolean;
-  qtdMemoriaPlacaVideo: number;
-  programasAbertos: string[];
-  computadorLigado: boolean;
-  softweresInstalados: Software[];
+  private _marca: string;
+  public get marca(): string {
+    return this._marca;
+  }
+  public set marca(value: string) {
+    this._marca = value;
+  }
+
+  private _capacidadeHD: number;
+  public get capacidadeHD(): number {
+    return this._capacidadeHD;
+  }
+  public set capacidadeHD(value: number) {
+    this._capacidadeHD = value;
+  }
+
+  private _capacidadeRAM: number;
+  public get capacidadeRAM(): number {
+    return this._capacidadeRAM;
+  }
+  public set capacidadeRAM(value: number) {
+    this._capacidadeRAM = value;
+  }
+
+  private _freqProcessador: number;
+  public get freqProcessador(): number {
+    return this._freqProcessador;
+  }
+  public set freqProcessador(value: number) {
+    this._freqProcessador = value;
+  }
+
+  private _clockProcessador: number;
+  public get clockProcessador(): number {
+    return this._clockProcessador;
+  }
+  public set clockProcessador(value: number) {
+    this._clockProcessador = value;
+  }
+
+  private _qntNucleosProcessador: number;
+  public get qntNucleosProcessador(): number {
+    return this._qntNucleosProcessador;
+  }
+  public set qntNucleosProcessador(value: number) {
+    this._qntNucleosProcessador = value;
+  }
+
+  private _PlacVideoIntegrada: boolean;
+  public get PlacVideoIntegrada(): boolean {
+    return this._PlacVideoIntegrada;
+  }
+  public set PlacVideoIntegrada(value: boolean) {
+    this._PlacVideoIntegrada = value;
+  }
+
+  private _qtdMemoriaPlacaVideo: number;
+  public get qtdMemoriaPlacaVideo(): number {
+    return this._qtdMemoriaPlacaVideo;
+  }
+  public set qtdMemoriaPlacaVideo(value: number) {
+    this._qtdMemoriaPlacaVideo = value;
+  }
+
+  private _programasAbertos: string[];
+
+  private _computadorLigado: boolean;
+
+  private _softweresInstalados: Software[];
 
   constructor() {
-    this.programasAbertos = new Array();
-    this.computadorLigado = false;
+    this._programasAbertos = new Array();
+    this._computadorLigado = false;
     //     this.marca = "0";
     //     this.capacidadeHD = 0;
     //     this.capacidadeRAM = 0;
@@ -50,37 +110,40 @@ export class Computador {
 
   instalarSoftwere(sw: Software) {
     if (sw != null) {
-      this.softweresInstalados.push(sw);
+      this._softweresInstalados.push(sw);
     }
   }
 
-  carregarBios() {
+  private carregarBios() {
     console.log("...carregando bios");
   }
 
-  carregarSO(so: string) {
+  private carregarSO(so: string) {
     console.log(`Carregando S.O. ${so}`);
   }
 
-  ligarDesligar(): boolean {
-    if (this.computadorLigado == false) {
+  public ligarDesligar(): boolean {
+    if (this._computadorLigado == false) {
       this.carregarBios();
+      this,this.carregarSO("Windows")
       console.log("computador ligado");
-      this.computadorLigado = !this.computadorLigado;
+      this._computadorLigado = !this._computadorLigado;
       return true;
     }
     console.log("computador desligado");
-    this.computadorLigado = !this.computadorLigado;
+    this._computadorLigado = !this._computadorLigado;
     return false;
   }
 
-  abrirProgramas(programa: string, memRAM: number): boolean {
-    if (this.computadorLigado == true) {
-      const index = this.softweresInstalados.findIndex(p =>p.nome === programa)
-      if (this.capacidadeRAM > memRAM && index > 0) {
+  public abrirProgramas(programa: string, memRAM: number): boolean {
+    if (this._computadorLigado == true) {
+      const index = this._softweresInstalados.findIndex(
+        (p) => p.nome === programa
+      );
+      if (this._capacidadeRAM > memRAM && index > 0) {
         console.log(`Abrindo programa ${programa}`);
-        this.programasAbertos.push(programa);
-        this.capacidadeRAM -= memRAM;
+        this._programasAbertos.push(programa);
+        this._capacidadeRAM -= memRAM;
         return true;
       }
       console.log("memoria insuficiente");
@@ -90,14 +153,14 @@ export class Computador {
   }
 
   fecharProgramas(programa: string, memRAM: number): boolean {
-    const index = this.programasAbertos.findIndex((p) => p === programa);
-    if (this.computadorLigado == true) {
+    const index = this._programasAbertos.findIndex((p) => p === programa);
+    if (this._computadorLigado == true) {
       if (index !== -1) {
         console.log(`Fechando programa ${programa}`);
-        this.programasAbertos = this.programasAbertos.filter(
+        this._programasAbertos = this._programasAbertos.filter(
           (p) => p != programa
         );
-        this.capacidadeRAM += memRAM;
+        this._capacidadeRAM += memRAM;
         // delete this.programasAbertos[index]
         return true;
       }
@@ -108,8 +171,8 @@ export class Computador {
   }
 
   listarProgramasAbertos() {
-    if (this.computadorLigado == true) {
-      console.log(this.programasAbertos);
+    if (this._computadorLigado == true) {
+      console.log(this._programasAbertos);
     }
   }
 }

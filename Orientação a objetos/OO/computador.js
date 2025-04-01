@@ -20,12 +20,12 @@ abrirProgramas()
 fecharProgramas()
 programasAbertos()
 */
-Object.defineProperty(exports, "__esModule", { value: true });
+exports.__esModule = true;
 exports.Computador = void 0;
 var Computador = /** @class */ (function () {
     function Computador() {
-        this.programasAbertos = new Array();
-        this.computadorLigado = false;
+        this._programasAbertos = new Array();
+        this._computadorLigado = false;
         //     this.marca = "0";
         //     this.capacidadeHD = 0;
         //     this.capacidadeRAM = 0;
@@ -35,6 +35,91 @@ var Computador = /** @class */ (function () {
         //     this.PlacVideoIntegrada = true;
         //     this.qtdMemoriaPlacaVideo = 0;
     }
+    Object.defineProperty(Computador.prototype, "marca", {
+        get: function () {
+            return this._marca;
+        },
+        set: function (value) {
+            this._marca = value;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Computador.prototype, "capacidadeHD", {
+        get: function () {
+            return this._capacidadeHD;
+        },
+        set: function (value) {
+            this._capacidadeHD = value;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Computador.prototype, "capacidadeRAM", {
+        get: function () {
+            return this._capacidadeRAM;
+        },
+        set: function (value) {
+            this._capacidadeRAM = value;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Computador.prototype, "freqProcessador", {
+        get: function () {
+            return this._freqProcessador;
+        },
+        set: function (value) {
+            this._freqProcessador = value;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Computador.prototype, "clockProcessador", {
+        get: function () {
+            return this._clockProcessador;
+        },
+        set: function (value) {
+            this._clockProcessador = value;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Computador.prototype, "qntNucleosProcessador", {
+        get: function () {
+            return this._qntNucleosProcessador;
+        },
+        set: function (value) {
+            this._qntNucleosProcessador = value;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Computador.prototype, "PlacVideoIntegrada", {
+        get: function () {
+            return this._PlacVideoIntegrada;
+        },
+        set: function (value) {
+            this._PlacVideoIntegrada = value;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Computador.prototype, "qtdMemoriaPlacaVideo", {
+        get: function () {
+            return this._qtdMemoriaPlacaVideo;
+        },
+        set: function (value) {
+            this._qtdMemoriaPlacaVideo = value;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Computador.prototype.instalarSoftwere = function (sw) {
+        if (sw != null) {
+            this._softweresInstalados.push(sw);
+        }
+    };
     Computador.prototype.carregarBios = function () {
         console.log("...carregando bios");
     };
@@ -42,22 +127,24 @@ var Computador = /** @class */ (function () {
         console.log("Carregando S.O. ".concat(so));
     };
     Computador.prototype.ligarDesligar = function () {
-        if (this.computadorLigado == false) {
+        if (this._computadorLigado == false) {
             this.carregarBios();
+            this, this.carregarSO("Windows");
             console.log("computador ligado");
-            this.computadorLigado = !this.computadorLigado;
+            this._computadorLigado = !this._computadorLigado;
             return true;
         }
         console.log("computador desligado");
-        this.computadorLigado = !this.computadorLigado;
+        this._computadorLigado = !this._computadorLigado;
         return false;
     };
     Computador.prototype.abrirProgramas = function (programa, memRAM) {
-        if (this.computadorLigado == true) {
-            if (this.capacidadeRAM > memRAM) {
+        if (this._computadorLigado == true) {
+            var index = this._softweresInstalados.findIndex(function (p) { return p.nome === programa; });
+            if (this._capacidadeRAM > memRAM && index > 0) {
                 console.log("Abrindo programa ".concat(programa));
-                this.programasAbertos.push(programa);
-                this.capacidadeRAM -= memRAM;
+                this._programasAbertos.push(programa);
+                this._capacidadeRAM -= memRAM;
                 return true;
             }
             console.log("memoria insuficiente");
@@ -66,12 +153,12 @@ var Computador = /** @class */ (function () {
         return false;
     };
     Computador.prototype.fecharProgramas = function (programa, memRAM) {
-        var index = this.programasAbertos.findIndex(function (p) { return p === programa; });
-        if (this.computadorLigado == true) {
+        var index = this._programasAbertos.findIndex(function (p) { return p === programa; });
+        if (this._computadorLigado == true) {
             if (index !== -1) {
                 console.log("Fechando programa ".concat(programa));
-                this.programasAbertos = this.programasAbertos.filter(function (p) { return p != programa; });
-                this.capacidadeRAM += memRAM;
+                this._programasAbertos = this._programasAbertos.filter(function (p) { return p != programa; });
+                this._capacidadeRAM += memRAM;
                 // delete this.programasAbertos[index]
                 return true;
             }
@@ -81,36 +168,11 @@ var Computador = /** @class */ (function () {
         return false;
     };
     Computador.prototype.listarProgramasAbertos = function () {
-        if (this.computadorLigado == true) {
-            console.log(this.programasAbertos);
+        if (this._computadorLigado == true) {
+            console.log(this._programasAbertos);
         }
     };
     return Computador;
 }());
 exports.Computador = Computador;
 // module.exports = Computador;
-var comp1 = new Computador();
-comp1.marca = "DELL";
-comp1.capacidadeHD = 1024;
-comp1.capacidadeRAM = 32;
-comp1.freqProcessador = 3.5;
-comp1.qntNucleosProcessador = 8;
-comp1.PlacVideoIntegrada = true;
-comp1.ligarDesligar();
-comp1.abrirProgramas("Visual Studio Code", 2);
-comp1.abrirProgramas("Crhome", 20);
-comp1.abrirProgramas("Opera", 15);
-comp1.listarProgramasAbertos();
-comp1.fecharProgramas("firefox", 0);
-comp1.fecharProgramas("Crhome", 20);
-comp1.ligarDesligar();
-// let comp2 = new Computador();
-// comp2.marca = "Apple";
-// comp2.capacidadeHD = 1000;
-// comp2.capacidadeRAM = 16;
-// comp2.freqProcessador = 3.8;
-// comp2.qntNucleosProcessador = 8;
-// comp2.PlacVideoIntegrada = false;
-// comp2.qtdMemoriaPlacaVideo = 6;
-// comp2.ligar();
-// comp2.abrirProgramas("Safari", 0.5);

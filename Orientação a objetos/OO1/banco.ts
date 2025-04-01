@@ -5,12 +5,18 @@
 // 3 - Os bancos oferecem aos clientes a possibilidade de obter um cartão de crédito que pode ser utilizados para fazer compras. Um cartão de crédito possui um número e uma data de validade. Crie uma classe para modelar os objetos que representarão os cartões de crédito. Faça um teste criando dois objetos da classe CartaoDeCredito.
 
 export class Cliente {
-  codigo: string;
-  nome: string;
+  private _codigo: string;
+  private _nome: string;
+  public get nome_1(): string {
+    return this._nome;
+  }
+  public set nome_1(value: string) {
+    this._nome = value;
+  }
 
   constructor(codigo: string, nome: string) {
-    this.codigo = codigo;
-    this.nome = nome;
+    this._codigo = codigo;
+    this._nome = nome;
   }
 }
 
@@ -18,14 +24,25 @@ const cli1: Cliente = new Cliente("3030", "cliente1");
 const cli2: Cliente = new Cliente("3031", "cliente2");
 
 export class CartaoCredito {
-  numero: string;
-  validade: string;
-  cliente: Cliente;
+  private _numero: string;
+  public get numero_1(): string {
+    return this._numero;
+  }
+
+  private _validade: string;
+  public get validade(): string {
+    return this._validade;
+  }
+
+  private _cliente: Cliente;
+  public get cliente(): Cliente {
+    return this._cliente;
+  }
 
   constructor(numero: string, validade: string, cliente: Cliente) {
-    this.numero = numero;
-    this.validade = validade;
-    this.cliente = cliente;
+    this._numero = numero;
+    this._validade = validade;
+    this._cliente = cliente;
   }
 }
 
@@ -43,10 +60,13 @@ const cartão2: CartaoCredito = new CartaoCredito(
 // 4 - As agências do banco possuem número. Crie uma classe para definir os objetos que representarão as agências. Faça um teste criando dois objetos da classe Agencia.
 
 export class Agencia {
-  numero: string;
+  private _numero: string;
+  public get numero(): string {
+    return this._numero;
+  }
 
   constructor(numero: string) {
-    this.numero = numero;
+    this._numero = numero;
   }
 }
 
@@ -60,56 +80,77 @@ const agen1 = new Agencia("0210");
 // 8 - Acrescente alguns métodos na classe Conta para realizar as operações de deposito, saque, impressão de extrato e consulta do saldo disponível. Implementar a lógica de cada método. Após testar os métodos.
 
 export class Conta {
-  numero: string;
-  saldo: number;
-  limite: number;
-  agencia: Agencia;
+  private _numero: string;
+  public get numero(): string {
+    return this._numero;
+  }
+
+  private _saldo: number;
+  public get saldo(): number {
+    return this._saldo;
+  }
+
+  private _limite: number;
+  public get limite(): number {
+    return this._limite;
+  }
+  public set limite(value: number) {
+    this._limite = value;
+  }
+
+  private _agencia: Agencia;
+  public get agencia(): Agencia {
+    return this._agencia;
+  }
+  public set agencia(value: Agencia) {
+    this._agencia = value;
+  }
 
   constructor(numero: string, saldo: number, agencia: Agencia) {
-    this.numero = numero;
-    this.saldo = saldo;
-    this.limite = 100;
-    this.agencia = agencia;
+    this._numero = numero;
+    this._saldo = saldo;
+    this._limite = 100;
+    this._agencia = agencia;
   }
 
   depositar(value: number): void {
-    this.saldo += value;
+    this._saldo += value;
   }
   sacar(saque: number): boolean {
-    if (saque < this.saldo + this.limite) {
-      if (saque > this.saldo) {
-        this.saldo -= saque;
-        this.limite += this.saldo;
-        this.saldo = 0;
+    if (saque < this._saldo + this._limite) {
+      if (saque > this._saldo) {
+        this._saldo -= saque;
+        this._limite += this._saldo;
+        this._saldo = 0;
         return true;
       }
-      this.saldo -= saque;
+      this._saldo -= saque;
       return true;
     }
     return false;
   }
 
   tirarExtrato(): string {
-    return `Conta: $${this.numero} Agencia: ${this.agencia.numero}
-Saldo: $${this.saldo.toFixed(2)} 
-limite: $${this.limite.toFixed(2)}`;
+    return `Conta: $${this._numero} Agencia: ${this._agencia.numero}
+Saldo: $${this._saldo.toFixed(2)} 
+limite: $${this._limite.toFixed(2)}`;
   }
 
   saldoDisponível(): string {
-    return `Saldo disponivel de $${(this.saldo + this.limite).toFixed(2)}`;
+    return `Saldo disponivel de $${(this._saldo + this._limite).toFixed(2)}`;
   }
 
   transferencia(conta: Conta, valor: number): boolean {
-    if (valor < this.saldo + this.limite) {
-      if (valor > this.saldo) {
-        this.saldo -= valor;
-        this.limite += this.saldo;
-        this.saldo = 0;
-        conta.saldo += valor;
+    if (valor < this._saldo + this._limite) {
+      if (valor > this._saldo) {
+        this._saldo -= valor;
+        this._limite += this._saldo;
+        this._saldo = 0;
+        conta._saldo += valor;
         return true;
       }
-      this.saldo -= valor;
-      conta.saldo += valor;
+      this._saldo -= valor;
+      conta._saldo += valor;
       return true;
     }
     return false;
@@ -131,33 +172,37 @@ console.log(cont1.tirarExtrato());
 
 // 9 - Sabendo que qualquer empresa possui funcionários, crie uma classe chamada Funcionario para representá-los. Acrescente os atributos nome e salario a essa classe. Além disso, você deve criar dois métodos: um para aumentar o salário e outro para consultar os dados dos funcionários. Testar os métodos de um objeto da classe Funcionario.
 
-export class Funcionario {
-  nome: string;
-  salario: number;
 
-  constructor(nome: string, salario: number) {
-    this.nome = nome;
-    this.salario = salario;
+
+// 1) Defina uma classe para modelar os funcionários do banco. Sabendo que todo funcionário possui nome e salário, inclua os getters e setters dos atributos.
+
+export class Funcionario {
+  private _nome: string;
+  public get nome(): string {
+    return this._nome;
+  }
+  public set nome(value: string) {
+    this._nome = value;
+  }
+
+  private _salario: number;
+  public get salario(): number {
+    return this._salario;
+  }
+  public set salario(value: number) {
+    this._salario = value;
+  }
+
+  constructor() {
   }
 
   aumentarSalario(percentual: number) {
-    this.salario += (this.salario * percentual) / 100;
+    this._salario += (this._salario * percentual) / 100;
   }
 
   consultarDados(): string {
-    return `      Nome: $${this.nome} 
-            Salario: $${this.salario.toFixed(2)}`;
+    return `      Nome: $${this._nome} 
+            Salario: $${this._salario.toFixed(2)}`;
   }
 }
 
-// 1) Defina um vínculo entre os objetos que representam os clientes e os objetos que representam os cartões de crédito. Para isso, você deve alterar a classe CartaoDeCredito. Teste o relacionamento entre clientes e cartões de crédito.
-
-// 2) Defina um vínculo entre os objetos que representam as agências e os objetos que representam os contas. Para isso, você deve alterar a classe Conta. Teste o relacionamento entre contas e agências.
-
-// 4) Acrescente um construtor na classe Agencia para receber um número como parâmetro.
-
-// 5) Acrescente um construtor na classe CartaoDeCredito para receber um número como parâmetro.
-
-// 6) Acrescente um construtor na classe Conta para receber uma Agência como parâmetro.
-
-// 7) Acrescente um método na classe Conta para implementar a lógica de transferência de valores entre contas. Faça um teste para verificar o funcionamento do método transfere.
