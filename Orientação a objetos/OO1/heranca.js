@@ -42,6 +42,10 @@ var Funcionario = /** @class */ (function () {
         enumerable: false,
         configurable: true
     });
+    Funcionario.prototype.aumentarSalario = function () {
+        this._salario += (this._salario * 10) / 100;
+        return this._salario;
+    };
     Funcionario.prototype.calculaBonificacao = function () {
         this.salario = (this.salario * 10) / 100;
         return this.salario;
@@ -82,6 +86,10 @@ var Gerente = /** @class */ (function (_super) {
         enumerable: false,
         configurable: true
     });
+    Gerente.prototype.aumentarSalario = function () {
+        this.salario += (this.salario * 15) / 100;
+        return this.salario;
+    };
     Gerente.prototype.calculaBonificacao = function () {
         this.salario = (this.salario * 15) / 100;
         return this.salario;

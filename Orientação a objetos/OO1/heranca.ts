@@ -17,6 +17,11 @@ export class Funcionario {
     this._salario = value;
   }
 
+  
+  //protected permite acesso de classes filhas porém n de forma experna as classes
+  protected _userName: string;
+  protected _senha: string; 
+
   constructor(nome: string, salario: number) {
     this._nome = nome;
     this._salario = salario;
@@ -42,26 +47,32 @@ export class Funcionario {
 // Os gerentes possuem um nome de usuário e uma senha para acessar o sistema do banco.
 
 export class Gerente extends Funcionario {
-  private _userName: string;
-  public get userName(): string {
-    return this._userName;
-  }
-  public set userName(value: string) {
-    this._userName = value;
-  }
 
-  private _senha: string;
-  public get senha(): string {
-    return this._senha;
-  }
-  public set senha(value: string) {
-    this._senha = value;
-  }
+//   private _userName: string;
+//   public get userName(): string {
+//     return this._userName;
+//   }
+//   public set userName(value: string) {
+//     this._userName = value;
+//   }
+
+//   private _senha: string;
+//  public get senha(): string {
+//     return this._senha;
+//   }
+//   public set senha(value: string) {
+//     this._senha = value;
+//   }
 
   constructor(nome: string, salario: number, userName: string, senha: string) {
     super(nome, salario);
     this._userName = userName;
     this._senha = senha;
+  }
+
+  aumentarSalario(): number{
+    this.salario += (this.salario * 15)/100
+    return this.salario
   }
 
   calculaBonificacao(): number {
