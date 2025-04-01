@@ -39,7 +39,7 @@ export class Funcionario {
 //   abstract calcularValeAlimentação(): void;
 
   //só pode ser acessado dentro de um metodo statico
-  static setarValeAlimentação2(valorVA): void{
+  static setarValeAlimentação2(valorVA: number): void{
     this._valeAlimentação2 = valorVA
     //vai alterar o valor em todas as classes filhas.
   };
