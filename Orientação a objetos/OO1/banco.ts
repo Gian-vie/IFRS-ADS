@@ -172,26 +172,28 @@ console.log(cont1.tirarExtrato());
 
 // 9 - Sabendo que qualquer empresa possui funcionários, crie uma classe chamada Funcionario para representá-los. Acrescente os atributos nome e salario a essa classe. Além disso, você deve criar dois métodos: um para aumentar o salário e outro para consultar os dados dos funcionários. Testar os métodos de um objeto da classe Funcionario.
 
+
+
+// 1) Defina uma classe para modelar os funcionários do banco. Sabendo que todo funcionário possui nome e salário, inclua os getters e setters dos atributos.
+
 export class Funcionario {
   private _nome: string;
-  public get nome_1(): string {
+  public get nome(): string {
     return this._nome;
   }
-  public set nome_1(value: string) {
+  public set nome(value: string) {
     this._nome = value;
   }
 
   private _salario: number;
-  public get salario_1(): number {
+  public get salario(): number {
     return this._salario;
   }
-  public set salario_1(value: number) {
+  public set salario(value: number) {
     this._salario = value;
   }
 
-  constructor(nome: string, salario: number) {
-    this._nome = nome;
-    this._salario = salario;
+  constructor() {
   }
 
   aumentarSalario(percentual: number) {
@@ -204,14 +206,3 @@ export class Funcionario {
   }
 }
 
-// 1) Defina um vínculo entre os objetos que representam os clientes e os objetos que representam os cartões de crédito. Para isso, você deve alterar a classe CartaoDeCredito. Teste o relacionamento entre clientes e cartões de crédito.
-
-// 2) Defina um vínculo entre os objetos que representam as agências e os objetos que representam os contas. Para isso, você deve alterar a classe Conta. Teste o relacionamento entre contas e agências.
-
-// 4) Acrescente um construtor na classe Agencia para receber um número como parâmetro.
-
-// 5) Acrescente um construtor na classe CartaoDeCredito para receber um número como parâmetro.
-
-// 6) Acrescente um construtor na classe Conta para receber uma Agência como parâmetro.
-
-// 7) Acrescente um método na classe Conta para implementar a lógica de transferência de valores entre contas. Faça um teste para verificar o funcionamento do método transfere.
