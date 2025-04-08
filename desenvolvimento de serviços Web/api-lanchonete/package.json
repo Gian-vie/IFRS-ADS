@@ -1,7 +1,6 @@
 {
   "name": "api-lanchonete",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
@@ -14,5 +13,6 @@
   "devDependencies": {
     "express": "^4.21.2",
     "nodemon": "^3.1.9"
-  }
+  },
+  "description": ""
 }
