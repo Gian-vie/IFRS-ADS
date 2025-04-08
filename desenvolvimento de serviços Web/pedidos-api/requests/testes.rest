@@ -1,0 +1,31 @@
+@baseURL = http://localhost:3001
+@clienteId = COLE_AQUI_O_ID_DO_CLIENTE
+### Criar cliente
+POST {{baseURL}}/clientes
+Content-Type: application/json
+{
+ "nome": "Ana Paula",
+ "email": "ana@exemplo.com"
+}
+### Listar clientes
+GET {{baseURL}}/clientes
+### Criar pedido
+POST {{baseURL}}/pedidos
+Content-Type: application/json
+
+{
+ "cliente": "{{clienteId}}",
+ "valorTotal": 200.00
+}
+
+### Listar todos os pedidos (com dados do cliente)
+GET {{baseURL}}/pedidos
+
+### Buscar pedidos com valor acima de 150
+GET {{baseURL}}/pedidos/buscar?valorMinimo=150
+
+### Buscar pedidos de um cliente específico
+GET {{baseURL}}/pedidos/buscar?clienteId={{clienteId}}
+
+### Buscar pedidos com ambos os filtros
+GET {{baseURL}}/pedidos/buscar?clienteId={{clienteId}}&valorMinimo=100
