@@ -3,10 +3,12 @@
 ### Criar cliente
 POST {{baseURL}}/clientes
 Content-Type: application/json
+
 {
  "nome": "Ana Paula",
  "email": "ana@exemplo.com"
 }
+
 ### Listar clientes
 GET {{baseURL}}/clientes
 ### Criar pedido
