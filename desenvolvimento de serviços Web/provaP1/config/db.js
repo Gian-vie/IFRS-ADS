@@ -1,13 +1,17 @@
-const mongoose = require("mongoose");
+const mysql = require("mysql2");
 
-const connectDB = async () => {
-    try {
-        await mongoose.connect("mongodb://localhost:27017/relacional_api")
-        console.log("conectado ao mongoDB com sucesso!")
-    } catch (error) {
-        console.error("erro ao conectar no mongoDB", error)
-        process.exit(1)
+const connection = mysql.createConnection({
+    host: "localhost",
+    user: "root",
+    password: "",
+    database: "exemplo_db",
+   });
+   // Conecta ao banco de dados
+   connection.connect((err) => {
+    if (err) {
+    console.error("Erro ao conectar ao banco de dados:", err);
+    return;
     }
-};
-
-module.exports = connectDB
+    console.log("Conectado ao banco de dados MySQL com sucesso!");
+   });
+   module.exports = connection;
