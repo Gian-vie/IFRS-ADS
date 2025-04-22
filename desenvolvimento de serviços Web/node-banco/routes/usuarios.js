@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const connection = require("../config/db");
+
 // Rota para listar todos os usuários (READ)
 router.get("/", (req, res) => {
   connection.query("SELECT * FROM usuarios", (err, results) => {
