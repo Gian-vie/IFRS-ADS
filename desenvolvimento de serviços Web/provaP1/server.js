@@ -11,7 +11,7 @@ app.use(express.json());
 
 app.use("/jogadores", jogadoresRoutes);
 app.use("/jogos", jogoRoutes);
-app.use("/pontuacao", pontuacaoRoutes)
+app.use("/pontuacoes", pontuacaoRoutes)
 
 app.listen(PORT, () => {
     console.log(`Servidor rodando em http://localhost:${PORT}`);

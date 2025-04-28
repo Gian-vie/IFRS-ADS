@@ -1,0 +1,64 @@
+@baseURL = http://localhost:3001
+
+### GET /jogos – listar todos os jogos.
+GET {{baseURL}}/jogos
+Content-Type: application/json
+
+### GET /jogos/:id – buscar jogo por ID.
+GET {{baseURL}}/jogos/1
+Content-Type: application/json
+
+### POST /jogos – cadastrar novo jogo.
+POST {{baseURL}}/jogos
+Content-Type: application/json
+
+{
+    "nome": "Mario",
+    "plataforma": "swich",
+    "lancamento": "1998"
+}
+
+### PUT /jogos/:id – atualizar um jogo existente.
+PUT {{baseURL}}/jogos/1
+Content-Type: application/json
+
+{
+    "nome": "Mario world",
+    "plataforma": "swich",
+    "lancamento": "1998"
+}
+
+### DELETE /jogos/:id – excluir um jogo.
+DELETE {{baseURL}}/jogos/1
+Content-Type: application/json
+
+### GET /jogadores – listar todos os jogadores.
+GET {{baseURL}}/jogadores
+Content-Type: application/json
+
+### POST /jogadores – cadastrar um novo jogador.
+POST {{baseURL}}/jogadores
+Content-Type: application/json
+
+{
+    "nome": "Nevil",
+    "nickname": "Mavil"
+}
+
+### POST/pontuacoes – cadastrar uma nova pontuação (deve verificar se o jogo e o jogador existem).
+POST {{baseURL}}/pontuacoes
+Content-Type: application/json
+
+{
+    "idJogo": "",
+    "idJogador": "",
+    "pontuacao": 123
+}
+
+### GET/ranking/:idJogo – listar os 10 jogadores com as maiores pontuações para um jogo específico.
+GET {{baseURL}}/ranking/:idJogo
+Content-Type: application/json
+
+### Rota GET /jogos/populares – retornar os 3 jogos com maior número de pontuações registradas.
+GET {{baseURL}}/jogos/populares
+Content-Type: application/json
