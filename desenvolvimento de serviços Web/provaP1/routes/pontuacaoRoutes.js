@@ -91,13 +91,13 @@ router.get("/ranking/:idJogo", (req, res) => {
 // registradas.
 
 router.get("/jogos/populares", (req, res) => {
-    const { idJogador } = req.params;
+    const { idJogador, idJogo } = req.params;
 
     const sql = `
         SELECT jogos.nome AS jogoNome, COUNT(pontuacoes.id) AS totalPontuacoes
         FROM pontuacoes
-        INNER JOIN jogos ON pontuacoes.jogoId = jogos.id
-        GROUP BY pontuacoes.jogoId
+        INNER JOIN jogos ON pontuacoes.idJogo = jogos.id
+        GROUP BY pontuacoes.idJogo
         ORDER BY totalPontuacoes DESC
         LIMIT 3
     `;

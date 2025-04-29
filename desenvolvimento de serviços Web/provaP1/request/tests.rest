@@ -13,13 +13,13 @@ POST {{baseURL}}/jogos
 Content-Type: application/json
 
 {
-    "nome": "Mario",
+    "nome": "sonic",
     "plataforma": "Super Nintendo",
     "lancamento": "1998"
 }
 
 ### PUT /jogos/:id – atualizar um jogo existente.
-PUT {{baseURL}}/jogos/2
+PUT {{baseURL}}/jogos/1
 Content-Type: application/json
 
 {
@@ -29,7 +29,7 @@ Content-Type: application/json
 }
 
 ### DELETE /jogos/:id – excluir um jogo.
-DELETE {{baseURL}}/jogos/1
+DELETE {{baseURL}}/jogos/2
 Content-Type: application/json
 
 ### GET /jogadores – listar todos os jogadores.
@@ -50,7 +50,7 @@ POST {{baseURL}}/pontuacoes
 Content-Type: application/json
 
 {
-    "idJogo": 2,
+    "idJogo": 1,
     "idJogador": 1,
     "pontuacao": 123
 }
