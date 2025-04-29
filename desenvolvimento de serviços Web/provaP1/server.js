@@ -5,7 +5,7 @@ const jogoRoutes = require("./routes/jogoRoutes");
 const pontuacaoRoutes = require("./routes/pontuacaoRoutes")
 
 const app = express();
-const PORT = 3001;
+const PORT = 3000;
 
 app.use(express.json());
 

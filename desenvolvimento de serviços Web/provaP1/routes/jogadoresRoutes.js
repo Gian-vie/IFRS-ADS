@@ -3,7 +3,7 @@ const router = express.Router();
 const connection = require("../config/db");
 
 //  GET /jogadores – listar todos os jogadores.
-router.get("/jogadores", (req, res) => {
+router.get("/", (req, res) => {
     connection.query("SELECT * FROM jogadores", (err, results) => {
       if (err) {
         res.status(500).send("Erro ao buscar jogadores");
@@ -16,9 +16,9 @@ router.get("/jogadores", (req, res) => {
 
 
 //  POST /jogadores – cadastrar um novo jogador.
-router.post("/jogos", (req, res) => {
+router.post("/", (req, res) => {
     const { nome, nickname } = req.body
-    const sql = "INSERT INTO jogos (nome, nickname) VALUES (?, ?)";
+    const sql = "INSERT INTO jogadores (nome, nickname) VALUES (?, ?)";
     connection.query(sql, [nome, nickname], (err, results) => {
         if (err) {
             res.status(500).send("Erro ao inserir jogador");

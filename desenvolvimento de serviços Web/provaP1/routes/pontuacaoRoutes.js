@@ -4,7 +4,7 @@ const connection = require("../config/db");
 
 //  POST/pontuacoes – cadastrar uma nova pontuação (deve verificar se o jogo e o
 // jogador existem).
-router.post("/pontuacoes", (req, res) => {
+router.post("/", (req, res) => {
   const { idJogo, idJogador, pontuacao } = req.body;
   if (!idJogo || !idJogador || pontuacao === undefined) {
     return res
@@ -21,24 +21,24 @@ router.post("/pontuacoes", (req, res) => {
       );
   }
 
-  const veriJogo = "SELECT id FROM jogo WHERE id = ?";
+  const veriJogo = "SELECT id FROM jogos WHERE id = ?";
   connection.query(veriJogo, [idJogo], (err, results) => {
     if (err) {
       console.error("Erro ao verificar jogo:", err);
       return res.status(500).send("Erro ao verificar jogo.");
     }
-    if (jogoResult.length === 0) {
+    if (results.length === 0) {
       return res.status(404).send("Jogo não encontrado.");
     }
 
     // Verificar se o jogador existe
     const veriJogador = "SELECT id FROM jogadores WHERE id = ?";
-    connection.query(veriJogador, [jogadorId], (err, jogadorResult) => {
+    connection.query(veriJogador, [idJogador], (err, results) => {
       if (err) {
         console.error("Erro ao verificar jogador:", err);
         return res.status(500).send("Erro ao verificar jogador.");
       }
-      if (jogadorResult.length === 0) {
+      if (results.length === 0) {
         return res.status(404).send("Jogador não encontrado.");
       }
 

@@ -1,4 +1,4 @@
-@baseURL = http://localhost:3001
+@baseURL = http://localhost:3000
 
 ### GET /jogos – listar todos os jogos.
 GET {{baseURL}}/jogos
@@ -14,17 +14,17 @@ Content-Type: application/json
 
 {
     "nome": "Mario",
-    "plataforma": "swich",
+    "plataforma": "Super Nintendo",
     "lancamento": "1998"
 }
 
 ### PUT /jogos/:id – atualizar um jogo existente.
-PUT {{baseURL}}/jogos/1
+PUT {{baseURL}}/jogos/2
 Content-Type: application/json
 
 {
-    "nome": "Mario world",
-    "plataforma": "swich",
+    "nome": "Mario World",
+    "plataforma": "Super Nintendo",
     "lancamento": "1998"
 }
 
@@ -45,20 +45,20 @@ Content-Type: application/json
     "nickname": "Mavil"
 }
 
-### POST/pontuacoes – cadastrar uma nova pontuação (deve verificar se o jogo e o jogador existem).
+### POST /pontuacoes – cadastrar uma nova pontuação
 POST {{baseURL}}/pontuacoes
 Content-Type: application/json
 
 {
-    "idJogo": "",
-    "idJogador": "",
+    "idJogo": 2,
+    "idJogador": 1,
     "pontuacao": 123
 }
 
-### GET/ranking/:idJogo – listar os 10 jogadores com as maiores pontuações para um jogo específico.
-GET {{baseURL}}/ranking/:idJogo
+### GET /pontuacoes/ranking/:idJogo
+GET {{baseURL}}/pontuacoes/ranking/1
 Content-Type: application/json
 
-### Rota GET /jogos/populares – retornar os 3 jogos com maior número de pontuações registradas.
-GET {{baseURL}}/jogos/populares
+### GET /pontuacoes/jogos/populares
+GET {{baseURL}}/pontuacoes/jogos/populares
 Content-Type: application/json
