@@ -14,7 +14,6 @@ router.get("/", (req, res) => {
     });
   });
 
-
 //  POST /jogadores – cadastrar um novo jogador.
 router.post("/", (req, res) => {
     const { nome, nickname } = req.body
