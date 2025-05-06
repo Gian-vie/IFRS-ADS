@@ -1,0 +1,74 @@
+@baseURL = http://localhost:3000
+
+### GET /jogos – listar todos os jogos.
+GET {{baseURL}}/jogos
+Content-Type: application/json
+
+### GET /jogos/:id – buscar jogo por ID.
+GET {{baseURL}}/jogos/5
+Content-Type: application/json
+
+### POST /jogos – cadastrar novo jogo.
+POST {{baseURL}}/jogos
+Content-Type: application/json
+
+{
+    "nome": "mario2",
+    "plataforma": "Super Nintendo",
+    "lancamento": "1998"
+}
+
+### POST /jogos – cadastrar novo jogo.
+POST {{baseURL}}/jogos
+Content-Type: application/json
+
+{
+    "nome": "assasins creed",
+    "plataforma": "Super Nintendo",
+    "lancamento": "1998"
+}
+
+### PUT /jogos/:id – atualizar um jogo existente.
+PUT {{baseURL}}/jogos/5
+Content-Type: application/json
+
+{
+    "nome": "Mario World2",
+    "plataforma": "Super Nintendo",
+    "lancamento": "1998"
+}
+
+### DELETE /jogos/:id – excluir um jogo.
+DELETE {{baseURL}}/jogos/5
+Content-Type: application/json
+
+### GET /jogadores – listar todos os jogadores.
+GET {{baseURL}}/jogadores
+Content-Type: application/json
+
+### POST /jogadores – cadastrar um novo jogador.
+POST {{baseURL}}/jogadores
+Content-Type: application/json
+
+{
+    "nome": "Nevil123",
+    "nickname": "Mavil123"
+}
+
+### POST /pontuacoes – cadastrar uma nova pontuação
+POST {{baseURL}}/pontuacoes
+Content-Type: application/json
+
+{
+    "idJogo": 2,
+    "idJogador": 14,
+    "pontuacao": 132
+}
+
+### GET /pontuacoes/ranking/:idJogo
+GET {{baseURL}}/pontuacoes/ranking/1
+Content-Type: application/json
+
+### GET /pontuacoes/jogos/populares
+GET {{baseURL}}/pontuacoes/jogos/populares
+Content-Type: application/json
