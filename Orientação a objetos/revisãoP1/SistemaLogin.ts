@@ -7,8 +7,8 @@ export class SisitemaLogin{
         this._usuarios = new Array<Usuario>();
     }
 
-    criarUsuario(nome: string, email: string, senha: string){
-        this._usuarios.push(new Usuario(nome, email, senha))
+    criarUsuario(nome: string, email: string,usuario: string, senha: string){
+        this._usuarios.push(new Usuario(nome, email, usuario , senha))
     }
     login(email: string, senha: string){
         let usr = this._usuarios.find(u => u.email = email)

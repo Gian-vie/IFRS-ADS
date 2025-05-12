@@ -1,4 +1,6 @@
-export class Usuario {
+import { IUsusario } from "../interface/IUsuario"
+
+export class Usuario implements IUsusario{
     private _nome: string
     public get nome(): string {
         return this._nome
@@ -15,6 +17,14 @@ export class Usuario {
         this._email = value
     }
 
+    private _usuario: string
+    public get usuario(): string {
+        return this._usuario
+    }
+    public set usuario(value: string) {
+        this._usuario = value
+    }
+
     private _senha: string
     public get senha(): string {
         return this._senha
@@ -23,9 +33,10 @@ export class Usuario {
         this._senha = value
     }
 
-    constructor(nome: string, email: string, senha: string){
+    constructor(nome: string, email: string, usuario: string, senha: string){
         this._email = email;
         this._nome = nome;
+        this.usuario = usuario
         this._senha = senha;
     }
 
