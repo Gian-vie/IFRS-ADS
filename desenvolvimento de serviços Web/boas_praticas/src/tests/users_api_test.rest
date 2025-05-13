@@ -1,0 +1,58 @@
+@baseURL = http://localhost:3000
+@id_do_usuario = 3
+### Listar todos os usuários
+GET {{baseURL}}/users
+Accept: application/json
+
+### Criar um novo usuário
+POST {{baseURL}}/users
+Content-Type: application/json
+
+{
+ "name": "Carlos Almeida",
+ "email": "carlos@example.com"
+}
+
+### Criar usuário com email inválido (erro esperado)
+POST {{baseURL}}/users
+Content-Type: application/json
+
+{
+ "name": "Teste Email Invalido",
+ "email": "email_invalido"
+}
+
+### Criar usuário com email repetido (erro esperado)
+POST {{baseURL}}/users
+Content-Type: application/json
+
+{
+ "name": "Carlos Almeida",
+ "email": "carlos@example.com"
+}
+
+### Atualizar um usuário existente (substitua @id_do_usuario)
+PUT {{baseURL}}/users/{{id_do_usuario}}
+Content-Type: application/json
+
+{
+ "name": "Carlos de Almeida Atualizado",
+ "email": "carlosatualizado@example.com"
+}
+
+### Atualizar usuário inexistente (erro esperado)
+PUT {{baseURL}}/users/9999
+Content-Type: application/json
+
+{
+ "name": "Usuario Inexistente",
+ "email": "inexistente@example.com"
+}
+
+### Deletar um usuário existente (substitua @id_do_usuario)
+DELETE {{baseURL}}/users/{{id_do_usuario}}
+Accept: application/json
+
+### Deletar um usuário inexistente (erro esperado)
+DELETE {{baseURL}}/users/9999
+Accept: application/json
