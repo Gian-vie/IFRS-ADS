@@ -1,0 +1,14 @@
+# Força todos os arquivos de texto a usar finais de linha LF
+* text=auto eol=lf
+# Especifica LF para arquivos comuns do projeto
+*.js text eol=lf
+*.json text eol=lf
+*.env text eol=lf
+*.sql text eol=lf
+*.md text eol=lf
+*.rest text eol=lf
+# Arquivos de configuração
+.eslintrc text eol=lf
+.prettierrc text eol=lf
+.gitattributes text eol=lf
+.gitignore text eol=lf
