@@ -1,0 +1,50 @@
+@baseURL = http://localhost:3000
+
+### Rota pública (acesso livre)
+GET {{baseURL}}/public/home
+Content-Type: application/json
+
+### Cadastro de novo usuário
+POST {{baseURL}}/auth/register
+Content-Type: application/json
+
+{
+ "email": "novo@ifrs.edu.br",
+ "password": "senha123",
+ "role": "user"
+}
+
+### Login do novo usuário (pegar o token gerado abaixo)
+POST {{baseURL}}/auth/login
+Content-Type: application/json
+
+{
+ "email": "novo@ifrs.edu.br",
+ "password": "senha123"
+}
+
+### Login do usuário comum (usuário já existente no banco)
+POST {{baseURL}}/auth/login
+Content-Type: application/json
+
+{
+ "email": "usuario@ifrs.edu.br",
+ "password": "123456"
+}
+
+### Login do administrador (usuário já existente no banco)
+POST {{baseURL}}/auth/login
+Content-Type: application/json
+
+{
+ "email": "admin@ifrs.edu.br",
+ "password": "admin123"
+}
+
+### Acesso ao painel (rota protegida, requer token de qualquer usuário autenticado)
+GET {{baseURL}}/protected/dashboard
+Authorization: Bearer {{"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5vdm9AaWZycy5lZHUuYnIiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0Nzc4NDE1MCwiZXhwIjoxNzQ3Nzg3NzUwfQ.eJrOP3Sz_z7A-tN1mMDrUTaUELiBvG6bZRlvE2woFd8"}}
+
+### Acesso à área admin (rota protegida, requer token de usuário com role "admin")
+GET {{baseURL}}/protected/admin
+Authorization: Bearer {{"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzdWFyaW9AaWZycy5lZHUuYnIiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0Nzc4NDE5NiwiZXhwIjoxNzQ3Nzg3Nzk2fQ.H_ecuUqSU8RbR_aFqG7OO41BmGGM7jPFUVcwxXOKW6g"}}
