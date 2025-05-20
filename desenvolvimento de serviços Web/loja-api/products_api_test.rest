@@ -1,0 +1,47 @@
+@baseURL = http://localhost:3000
+### Testar listagem de produtos
+GET {{baseURL}}/products
+Accept: application/json
+
+### Criar produto válido
+POST {{baseURL}}/products
+Content-Type: application/json
+
+{
+ "name": "Fone de Ouvido",
+ "price": 199.90,
+ "stock": 25
+}
+
+### Criar produto com preço inválido
+POST {{baseURL}}/products
+Content-Type: application/json
+
+{
+ "name": "Produto Inválido",
+ "price": -10,
+ "stock": 5
+}
+
+### Atualizar produto existente (ID 1)
+PUT {{baseURL}}/products/1
+Content-Type: application/json
+
+{
+ "name": "Fone Bluetooth",
+ "price": 249.90,
+ "stock": 20
+}
+
+### Atualizar produto com estoque negativo
+PUT {{baseURL}}/products/1
+Content-Type: application/json
+
+{
+ "name": "Fone Bluetooth",
+ "price": 249.90,
+ "stock": -3
+}
+
+### Excluir produto (ID 1)
+DELETE {{baseURL}}/products/1

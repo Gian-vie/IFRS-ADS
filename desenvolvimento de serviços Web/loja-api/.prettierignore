@@ -1,0 +1,12 @@
+# Dependências
+node_modules/
+# Variáveis de ambiente
+.env
+# Banco de dados / dumps
+*.sql
+# Build (se for adicionado depois)
+dist/
+build/
+# Testes REST (não são arquivos de código)
+tests/*.rest
+# VS Code s

@@ -1,0 +1,11 @@
+# Node.js
+node_modules/
+# Ambiente
+.env
+# Sistema operacional
+Thumbs.db
+# Editor e IDE
+.vscode/
+# Build / dist (caso adicione futuramente)
+dist/
+build/
