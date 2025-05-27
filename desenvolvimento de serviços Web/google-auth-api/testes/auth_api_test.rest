@@ -1,0 +1,11 @@
+### 1. Login com Google (envie o ID Token obtido no frontend)
+POST http://localhost:3000/auth/google
+Content-Type: application/json
+
+{
+ "id_token": "COLE_AQUI_O_ID_TOKEN_DO_GOOGLE"
+}
+
+### 2. Acesso à rota protegida /dashboard (envie o token JWT da API)
+GET http://localhost:3000/dashboard
+Authorization: Bearer SEU_TOKEN_JWT_DA_API
