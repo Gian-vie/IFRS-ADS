@@ -1,0 +1,28 @@
+@baseURL = http://localhost:3000/editoras
+### 🔹 Listar todas as editoras
+GET {{baseURL}}
+Content-Type: application/json
+###
+### 🔹 Buscar uma editora por ID
+GET {{baseURL}}/1
+Content-Type: application/json
+###
+### 🔹 Adicionar nova editora
+POST {{baseURL}}
+Content-Type: application/json
+{
+"nome": "Editora Aleph",
+"cidade": "São Paulo"
+}
+###
+### 🔹 Atualizar editora
+PUT {{baseURL}}/1
+Content-Type: application/json
+{
+"nome": "Editora Aleph",
+"cidade": "Rio de Janeiro"
+}
+###
+### 🔹 Deletar editora
+DELETE {{baseURL}}/3
+Content-Type: application/json
