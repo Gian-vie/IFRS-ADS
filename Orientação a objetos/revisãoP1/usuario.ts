@@ -31,7 +31,7 @@ export class Usuario implements IUsusario{
     }
     public set senha(value: string) {
         this._senha = value
-    }
+    } 
 
     constructor(nome: string, email: string, usuario: string, senha: string){
         this._email = email;

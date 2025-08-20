@@ -9,7 +9,6 @@ const publicRoutes = require("./routes/public.routes");
 
 // Importa as rotas protegidas, que só podem ser acessadas com um token JWT
 const protectedRoutes = require("./routes/protected.routes");
-const e = require("express");
 
 // Cria uma instância da aplicação Express
 const app = express();
