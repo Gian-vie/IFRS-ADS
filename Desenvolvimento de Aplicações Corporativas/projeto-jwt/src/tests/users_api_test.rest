@@ -1,0 +1,65 @@
+@baseURL = http://localhost:3000
+
+### Rota pública (acesso livre)
+GET {{baseURL}}/public/home
+Content-Type: application/json
+
+### Cadastro de novo usuário
+POST {{baseURL}}/auth/register
+Content-Type: application/json
+
+{
+    "email": "novo@ifrs.edu.br",
+    "password": "senha123",
+    "role": "user"
+}
+
+### Login do novo usuário (pegar o token gerado abaixo)
+# @name loginNewUser
+POST {{baseURL}}/auth/login
+Content-Type: application/json
+
+{
+    "email": "novo@ifrs.edu.br",
+    "password": "senha123"
+}
+
+# Variável para armazenar o token do novo usuário
+@newUserToken = {{loginNewUser.response.body.token}}
+
+### Login do usuário comum (usuário já existente no banco)
+# @name loginUser
+POST {{baseURL}}/auth/login
+Content-Type: application/json
+
+{
+    "email": "usuario@ifrs.edu.br",
+    "password": "123456"
+}
+
+# Variável para armazenar o token do usuário comum
+@userToken = {{loginUser.response.body.token}}
+
+### Login do administrador (usuário já existente no banco)
+# @name loginAdmin
+POST {{baseURL}}/auth/login
+Content-Type: application/json
+
+{
+    "email": "admin@ifrs.edu.br",
+    "password": "admin123"
+}
+
+# Variável para armazenar o token do administrador
+@adminToken = {{loginAdmin.response.body.token}}
+
+### Acesso ao painel (rota protegida, requer token de qualquer usuário autenticado)
+# O token do usuário comum é puxado da variável @userToken.
+# Você pode trocar para {{newUserToken}} ou {{adminToken}} se preferir.
+GET {{baseURL}}/protected/dashboard
+Authorization: Bearer {{userToken}}
+
+### Acesso à área admin (rota protegida, requer token de usuário com role "admin")
+# O token do administrador é puxado da variável @adminToken.
+GET {{baseURL}}/protected/admin
+Authorization: Bearer {{adminToken}}

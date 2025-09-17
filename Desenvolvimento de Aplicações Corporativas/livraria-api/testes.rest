@@ -1,0 +1,19 @@
+@baseURL = http://localhost:3000
+### Listar livros (simples)
+GET {{baseURL}}/livros
+Content-Type: application/json
+
+### Inserir novo livro
+POST http://localhost:3000/livros
+Content-Type: application/json
+
+{
+"titulo": "Ensaio sobre a Cegueira",
+"autor": "José Saramago",
+"ano_publicacao": 1995,
+"editora_id": 2
+}
+
+### Listar livros com editoras (JOIN)
+GET {{baseURL}}/livros/completo
+Content-Type: application/json

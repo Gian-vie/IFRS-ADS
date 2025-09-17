@@ -1,0 +1,23 @@
+### Teste 1 - Verificar se a API está no ar
+GET http://localhost:3000/ping
+Accept: application/json
+
+### Teste 2 - Obter lista de usuários
+GET http://localhost:3000/users
+Accept: application/json
+
+### Teste 3 - Criar novo usuário
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+"nome": "João"
+}
+
+### Teste 4 - Criar outro usuário (exemplo)
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+"nome": "Maria"
+}
