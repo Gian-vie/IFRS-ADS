@@ -1,0 +1,13 @@
+@baseURL = http://localhost:3000
+
+### Teste da rota GET /health
+GET {{baseURL}}/health
+Accept: application/json
+
+### Teste da rota GET /users/:id
+GET {{baseURL}}/users/42
+Accept: application/json
+
+### Teste da rota GET /error
+GET {{baseURL}}/error
+Accept: application/json
