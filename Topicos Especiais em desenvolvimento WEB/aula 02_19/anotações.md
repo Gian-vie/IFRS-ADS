@@ -10,3 +10,4 @@ servidor DNS
 conecta na porta 80(HTTP) ou 443(HTTPS(mais comum)) 
 
 conecta através do apache ao servidor backend
+
