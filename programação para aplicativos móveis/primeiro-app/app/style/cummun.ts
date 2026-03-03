@@ -28,6 +28,11 @@ export const communStyle = StyleSheet.create({
     shadowOpacity: 0.1,
     // textTransform: "uppercase"
   },
+  text: {
+    color: "white",
+    fontSize: 18,
+    fontFamily: "Arial",
+  },
   rotatingImage: {
     width: 150,
     height: 150,

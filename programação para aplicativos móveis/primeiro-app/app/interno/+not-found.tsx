@@ -1,6 +1,6 @@
 import { Text } from "@react-navigation/elements";
 import { View, Animated, Easing } from "react-native";
-import { communStyle } from "./style/cummun";
+import { communStyle } from "../style/cummun";
 import { Link } from "expo-router";
 import { useEffect, useRef } from "react";
 
@@ -38,7 +38,7 @@ export default function ListScreen() {
             </Animated.Text>
             <Text style={communStyle.subtitle404}>Página não encontrada</Text>
             <Text style={communStyle.description404}>Desculpe, a página que você procura não existe.</Text>
-            <Link href="/" style={communStyle.button404}>
+            <Link href="/interno/" style={communStyle.button404}>
               <Text style={communStyle.buttonText}>Voltar ao Início</Text>
             </Link>
         </View>

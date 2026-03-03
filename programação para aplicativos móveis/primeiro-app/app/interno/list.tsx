@@ -1,6 +1,6 @@
 import { Text } from "@react-navigation/elements";
 import { View } from "react-native";
-import { communStyle } from "./style/cummun";
+import { communStyle } from "../style/cummun";
 import { Link } from "expo-router";
 
 export default function ListScreen() {
@@ -8,8 +8,8 @@ export default function ListScreen() {
 
         <View style={communStyle.container}>
             <Text style={communStyle.title}>List</Text>
-            <Link href="/" style={[communStyle.button, communStyle.buttonText]}>Go to Home</Link>
-            <Link href="/list2" style={[communStyle.button, communStyle.buttonText]}>Go to List 2</Link>
+            <Link href="/interno/" style={[communStyle.button, communStyle.buttonText]}>Go to Home</Link>
+            <Link href="/interno/list2" style={[communStyle.button, communStyle.buttonText]}>Go to List 2</Link>
         </View>
     )
 }
