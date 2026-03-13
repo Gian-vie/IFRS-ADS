@@ -8,3 +8,5 @@ Route::get('/', function () {
 });
 
 Route::get('/loguin', [LoguinController::class, 'index']);
+
+route::post('/loguin', [LoguinController::class, 'autenticar'])->name('loguin');
