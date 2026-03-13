@@ -6,12 +6,12 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class LoguinController extends Controller
+class LoginController extends Controller
 {
-    // pior pagina de loguin existente
+    // pior pagina de login existente
     public function index()
     {
-        return view('loguin');
+        return view('login');
     }
 
     public function autenticar(Request $request)
@@ -19,9 +19,19 @@ class LoguinController extends Controller
         // dd($request->only('user', 'pass'));
         $login = $request->only('user', 'pass');
         $auth = Auth::attempt([
-            'email' => $login['user'],
-            'password' => $login['pass'],
+            'email' => $login['user'], //test@example.com
+            'password' => $login['pass'], //password
         ]);
-        dd($auth);
+        // dd($auth);
+        if ($auth) {
+            return redirect()->route('bemvindo');
+        } else {
+            return redirect()->route('login')->with('erro', 'usuario ou senha invalido');
+        }
+
+    }
+
+    public function bemvindo() {
+        return '<h1>você está autenticado<h1>';
     }
 }

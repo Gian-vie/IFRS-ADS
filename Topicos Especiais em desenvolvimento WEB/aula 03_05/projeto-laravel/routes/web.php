@@ -1,12 +1,14 @@
 <?php
 
-use App\Http\Controllers\LoguinController;
+use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/loguin', [LoguinController::class, 'index']);
+Route::get('/login', [LoginController::class, 'index']);
 
-route::post('/loguin', [LoguinController::class, 'autenticar'])->name('loguin');
+route::post('/login', [LoginController::class, 'autenticar'])->name('login');
+
+Route::get('/bemvindo', [LoginController::class, 'bemvindo'])->name('bemvindo');
