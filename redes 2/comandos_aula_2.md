@@ -1,0 +1,1 @@
+file:///C:/Users/gian.051003/Downloads/Laborat%C3%B3rios%20em%20Infraestrutura%20de%20Redes%20-%20configura%C3%A7%C3%A3o%20b%C3%A1sica%20de%20roteadores%20Cisco.pdf
