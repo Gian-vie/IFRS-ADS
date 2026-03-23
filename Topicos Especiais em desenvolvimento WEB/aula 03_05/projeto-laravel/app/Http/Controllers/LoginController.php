@@ -32,6 +32,15 @@ class LoginController extends Controller
     }
 
     public function bemvindo() {
-        return '<h1>você está autenticado<h1>';
+        return view('bemvindo');
     }
+
+    public function logout(){
+            auth::logout();
+            return redirect()->route('bemvindo');
+    }
+
+
+
+
 }
