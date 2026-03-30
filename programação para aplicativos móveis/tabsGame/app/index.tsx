@@ -4,7 +4,7 @@ import { Button, Text, TextInput, View } from "react-native";
 
 export default function Index() {
   const handleLogin = () => {
-    if()
+    // if()
     
     console.log("Login realizado com sucesso!");
     return replace("/game");
