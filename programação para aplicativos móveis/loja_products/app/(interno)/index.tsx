@@ -14,6 +14,11 @@ export default function Home() {
     >
       <Text>tela interna.</Text>
 
+      
+      <Text>Bem vindo a loja</Text>
+
+
+
       <Button title="Sair" onPress={() => logout()} />
     </View>
   );
