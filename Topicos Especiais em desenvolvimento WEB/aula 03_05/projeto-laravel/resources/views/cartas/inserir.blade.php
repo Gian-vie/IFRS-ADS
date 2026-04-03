@@ -6,7 +6,7 @@
     <br>
     <select name="tipo">
         <option value="fogo">Fogo</option>
-        <option value="eletrico">Elétrico</option>
+        <option value="elétrico">Elétrico</option>
     </select>
     <br>
     <input type="file" name="foto" placeholder="foto">
