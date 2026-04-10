@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Carta extends Model
 {
-    protected $fillable = ['nome', 'tipo', 'foto'];
+    protected $fillable = ['nome', 'tipo', 'foto', 'numero'];
 }
