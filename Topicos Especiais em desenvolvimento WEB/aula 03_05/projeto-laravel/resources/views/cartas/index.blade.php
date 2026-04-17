@@ -26,6 +26,8 @@
                 <th>Tipo</th>
                 <th>Foto</th>
                 <th>Número</th>
+                <th>editar</th>
+                <th>excluir</th>
             </tr>
 
             @foreach ($cartas as $carta)
@@ -37,6 +39,12 @@
                 </td>
                 <td><img src="{{ asset('storage/'.$carta['foto']) }}" alt="[NULL]" width="100" class="carta-imagem"></td>
                 <td>{{ $carta['numero'] }}</td>
+                <td>
+                    <a href="{{ route('cartas.editar', $carta['id']) }}">edit</a>
+                </td>
+                <td>
+                    <a href="{{ route('cartas.excluir', $carta['id']) }}">excluir</a>
+                </td>
             </tr>
             @endforeach
         </table>
