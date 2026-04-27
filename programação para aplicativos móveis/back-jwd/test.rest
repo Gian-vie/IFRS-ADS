@@ -1,0 +1,25 @@
+@host=http://localhost:3000
+
+GET {{host}}/
+
+### LOGIN
+
+POST {{host}}/login
+Content-Type: application/json
+
+{
+    "login": "teste",
+    "pwd": "123"
+}
+
+# > {% client.global.set("auth_token", response.body.token); %}
+
+
+
+### DASHBOARD
+
+GET {{host}}/dashboard
+
+### DASHBOARD COM TOKEN
+GET {{host}}/dashboard
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzc3MzI4MzUwLCJleHAiOjE3NzczMjkyNTB9.azeOtePJQGbfStBavLuxT-iGQ3PfmlCIItRFVnIw2jk
