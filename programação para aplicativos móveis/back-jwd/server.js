@@ -3,11 +3,13 @@ const express = require("express");
 const users = require("./users");
 const app = new express();
 const jwt = require("jsonwebtoken");
+const cors = require("cors");
 
 const PORT = process.env.PORT || 3000;
 const PRIVATE_KEY = process.env.PRIVATE_KEY;
 
 app.use(express.json());
+app.use(cors());
 
 app.get("/", (_, res) => {
   return res.json({ message: "Hello World!" });
