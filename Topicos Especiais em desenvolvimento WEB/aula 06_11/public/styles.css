@@ -1,0 +1,350 @@
+/* ======================================================
+   RESET & VARIÁVEIS
+====================================================== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg-app:      #0d0d0d;
+  --bg-header:   #1a1a2e;
+  --bg-chat:     #111118;
+  --bg-sidebar:  #0f0f1a;
+  --bg-input:    #1c1c2e;
+  --bg-overlay:  rgba(0, 0, 0, 0.85);
+
+  --border:      #2a2a4a;
+  --border-glow: #4040aa;
+
+  --text-main:   #c8c8e8;
+  --text-dim:    #5a5a8a;
+  --text-system: #888;
+
+  --accent:      #5555ff;
+  --accent-glow: #7777ff;
+  --green:       #00cc66;
+  --yellow:      #ffcc00;
+
+  --font:        'Share Tech Mono', 'Courier New', monospace;
+  --font-size:   14px;
+  --radius:      4px;
+}
+
+body {
+  background: var(--bg-app);
+  color: var(--text-main);
+  font-family: var(--font);
+  font-size: var(--font-size);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ======================================================
+   TELA DE LOGIN (Overlay)
+====================================================== */
+#overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--bg-overlay);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  backdrop-filter: blur(4px);
+}
+
+.login-box {
+  background: #10101e;
+  border: 1px solid var(--border-glow);
+  box-shadow: 0 0 40px rgba(80, 80, 255, 0.3), inset 0 0 20px rgba(0,0,0,0.5);
+  padding: 40px 48px;
+  width: 380px;
+  border-radius: var(--radius);
+}
+
+.login-box h1 {
+  font-size: 28px;
+  letter-spacing: 4px;
+  color: var(--accent-glow);
+  text-shadow: 0 0 12px var(--accent);
+  margin-bottom: 4px;
+}
+
+.login-box .subtitle {
+  color: var(--text-dim);
+  font-size: 11px;
+  letter-spacing: 2px;
+  margin-bottom: 32px;
+}
+
+.login-box label {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--text-dim);
+  margin-bottom: 8px;
+}
+
+.login-box input {
+  width: 100%;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text-main);
+  font-family: var(--font);
+  font-size: 15px;
+  padding: 10px 14px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  margin-bottom: 20px;
+}
+
+.login-box input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 8px rgba(80, 80, 255, 0.4);
+}
+
+.login-box button {
+  width: 100%;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  font-family: var(--font);
+  font-size: 13px;
+  letter-spacing: 3px;
+  padding: 12px;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+
+.login-box button:hover {
+  background: var(--accent-glow);
+  box-shadow: 0 0 14px rgba(100, 100, 255, 0.6);
+}
+
+.login-erro {
+  color: #ff6b6b;
+  font-size: 12px;
+  margin-top: 12px;
+  min-height: 18px;
+  letter-spacing: 1px;
+}
+
+/* ======================================================
+   LAYOUT PRINCIPAL
+====================================================== */
+#app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/* --- Barra de título superior --- */
+#header {
+  background: var(--bg-header);
+  border-bottom: 1px solid var(--border);
+  padding: 10px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+
+#header .titulo {
+  font-size: 16px;
+  letter-spacing: 3px;
+  color: var(--accent-glow);
+  text-shadow: 0 0 8px var(--accent);
+}
+
+#header .info-usuario {
+  font-size: 12px;
+  color: var(--text-dim);
+}
+
+#header .info-usuario span {
+  color: var(--green);
+}
+
+/* --- Área central (chat + sidebar) --- */
+#main {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* --- Janela de mensagens --- */
+#chat-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid var(--border);
+}
+
+#canal-header {
+  background: #13131f;
+  border-bottom: 1px solid var(--border);
+  padding: 7px 16px;
+  font-size: 12px;
+  color: var(--text-dim);
+  flex-shrink: 0;
+}
+
+#canal-header span { color: var(--yellow); }
+
+#mensagens {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px 16px;
+  background: var(--bg-chat);
+  scroll-behavior: smooth;
+}
+
+/* Scrollbar personalizada */
+#mensagens::-webkit-scrollbar { width: 6px; }
+#mensagens::-webkit-scrollbar-track { background: transparent; }
+#mensagens::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+/* --- Linha de mensagem --- */
+.msg-linha {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 3px 0;
+  line-height: 1.5;
+  border-bottom: 1px solid rgba(255,255,255,0.025);
+}
+
+.msg-hora {
+  color: var(--text-dim);
+  font-size: 11px;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+.msg-nick {
+  font-weight: bold;
+  flex-shrink: 0;
+  cursor: default;
+}
+
+.msg-nick::before { content: "<"; color: var(--text-dim); }
+.msg-nick::after  { content: ">"; color: var(--text-dim); }
+
+.msg-texto {
+  color: var(--text-main);
+  word-break: break-word;
+}
+
+/* Mensagem de sistema */
+.msg-sistema {
+  color: var(--text-dim);
+  font-size: 12px;
+  padding: 4px 0;
+  letter-spacing: 1px;
+}
+
+.msg-sistema::before { content: "*** "; color: var(--yellow); }
+
+/* --- Barra de envio --- */
+#envio-area {
+  display: flex;
+  gap: 8px;
+  padding: 10px 12px;
+  background: var(--bg-input);
+  border-top: 1px solid var(--border);
+  flex-shrink: 0;
+  align-items: center;
+}
+
+#meu-nick {
+  color: var(--green);
+  font-size: 13px;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+#input-msg {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text-main);
+  font-family: var(--font);
+  font-size: var(--font-size);
+  caret-color: var(--accent-glow);
+}
+
+#btn-enviar {
+  background: var(--accent);
+  border: none;
+  border-radius: var(--radius);
+  color: #fff;
+  font-family: var(--font);
+  font-size: 12px;
+  letter-spacing: 2px;
+  padding: 6px 16px;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.2s;
+}
+
+#btn-enviar:hover { background: var(--accent-glow); }
+
+/* --- Sidebar de usuários --- */
+#sidebar {
+  width: 180px;
+  background: var(--bg-sidebar);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+
+#sidebar-header {
+  background: #13131f;
+  border-bottom: 1px solid var(--border);
+  padding: 8px 12px;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--text-dim);
+  flex-shrink: 0;
+}
+
+#sidebar-header span { color: var(--yellow); }
+
+#lista-usuarios {
+  list-style: none;
+  overflow-y: auto;
+  flex: 1;
+  padding: 6px 0;
+}
+
+#lista-usuarios li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 12px;
+  font-size: 13px;
+  transition: background 0.15s;
+}
+
+#lista-usuarios li:hover { background: rgba(255,255,255,0.04); }
+
+/* Bolinha de status */
+.status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 6px var(--green);
+  flex-shrink: 0;
+}
+
+/* ======================================================
+   RESPONSIVO — telas pequenas
+====================================================== */
+@media (max-width: 600px) {
+  #sidebar { display: none; }
+  .login-box { padding: 28px 24px; width: 90vw; }
+}

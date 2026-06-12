@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ChatIRC</title>
+
+  <!-- Fonte monoespaçada para o visual retrô -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+
+  <!-- ======================================================
+     TELA DE LOGIN
+====================================================== -->
+  <div id="overlay">
+    <div class="login-box">
+      <h1>ChatIRC</h1>
+      <p class="subtitle">SALA DE BATE-PAPO</p>
+
+      <label for="input-nick">SEU NICKNAME</label>
+      <input id="input-nick" type="text" placeholder="ex: S3ph1r0t_BR" maxlength="20" autocomplete="off" autofocus />
+
+      <button id="btn-entrar">ENTRAR NA SALA</button>
+      <p class="login-erro" id="login-erro"></p>
+    </div>
+  </div>
+
+  <!-- ======================================================
+     APP PRINCIPAL (escondido até o login)
+====================================================== -->
+  <div id="app" style="display:none">
+
+    <!-- Barra de título -->
+    <div id="header">
+      <div class="titulo">⚡ ChatIRC</div>
+      <div class="info-usuario">
+        conectado como <span id="header-nick">—</span>
+      </div>
+    </div>
+
+    <!-- Área central -->
+    <div id="main">
+
+      <!-- Janela de chat -->
+      <div id="chat-wrapper">
+        <div id="canal-header">canal: <span>#geral</span></div>
+        <div id="mensagens"></div>
+
+        <!-- Input de envio -->
+        <div id="envio-area">
+          <span id="meu-nick">nick&gt;</span>
+          <input id="input-msg" type="text" placeholder="Digite sua mensagem..." maxlength="500" autocomplete="off" />
+          <button id="btn-enviar">ENVIAR</button>
+        </div>
+      </div>
+
+      <!-- Lista de usuários -->
+      <div id="sidebar">
+        <div id="sidebar-header">
+          ONLINE &mdash; <span id="contagem-usuarios">0</span>
+        </div>
+        <ul id="lista-usuarios"></ul>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ======================================================
+     JAVASCRIPT — Lógica do Cliente
+====================================================== -->
+  <script>
+    // --------------------------------------------------------
+    // Estado do cliente
+    // --------------------------------------------------------
+    let socket;          // conexão WebSocket
+    let meuUsername = "";
+    let minhaCor = "";
+
+    // --------------------------------------------------------
+    // Referências aos elementos do DOM
+    // --------------------------------------------------------
+    const overlay = document.getElementById("overlay");
+    const app = document.getElementById("app");
+    const inputNick = document.getElementById("input-nick");
+    const btnEntrar = document.getElementById("btn-entrar");
+    const loginErro = document.getElementById("login-erro");
+
+    const headerNick = document.getElementById("header-nick");
+    const mensagensDiv = document.getElementById("mensagens");
+    const meuNickSpan = document.getElementById("meu-nick");
+    const inputMsg = document.getElementById("input-msg");
+    const btnEnviar = document.getElementById("btn-enviar");
+    const listaUsuarios = document.getElementById("lista-usuarios");
+    const contagemUsuarios = document.getElementById("contagem-usuarios");
+
+    // --------------------------------------------------------
+    // 1. CONECTAR AO SERVIDOR
+    // --------------------------------------------------------
+    function conectar() {
+      const protocol = location.protocol === "https:" ? "wss" : "ws";
+      socket = new WebSocket(`${protocol}://${location.host}`);
+      socket.addEventListener("open", () => {
+        //conecta e envia o nickname para o servidor
+        socket.send(JSON.stringify({
+          tipo: "login",
+          username: meuUsername,
+        }));
+        
+        // Escuta mensagens do servidor
+        socket.addEventListener("message", (event) => {
+          const msg = JSON.parse(event.data);
+          tratarMensagem(msg);
+        });
+
+        socket.addEventListener("close", () => {
+          adicionarSistema("Conexão encerrada")
+        })
+      })
+
+
+    }
+    // --------------------------------------------------------
+    // 2. TRATAR MENSAGENS RECEBIDAS DO SERVIDOR
+    // --------------------------------------------------------
+    function tratarMensagem(msg) {
+
+      // Servidor confirmou o login
+      if (msg.tipo === "confirmacao") {
+        minhaCor = msg.color;
+        mostrarApp();
+      }
+
+      // Servidor rejeitou o nick (já em uso, etc.)
+      if (msg.tipo === "erro") {
+        loginErro.textContent = msg.texto;
+        socket.close();
+      }
+
+      // Mensagem de texto de algum usuário
+      if (msg.tipo === "mensagem") {
+        adicionarMensagem(msg);
+      }
+
+      // Evento de sistema (entrou/saiu) + atualização da lista
+      if (msg.tipo === "sistema") {
+        adicionarSistema(msg.texto);
+        atualizarListaUsuarios(msg.usuarios);
+      }
+    }
+
+    // --------------------------------------------------------
+    // 3. MOSTRAR O APP (esconder overlay)
+    // --------------------------------------------------------
+    function mostrarApp() {
+      overlay.style.display = "none";
+      app.style.display = "flex";
+      headerNick.textContent = meuUsername;
+      headerNick.style.color = minhaCor;
+      meuNickSpan.textContent = meuUsername + ">";
+      meuNickSpan.style.color = minhaCor;
+      inputMsg.focus();
+    }
+
+    // --------------------------------------------------------
+    // 4. RENDERIZAR MENSAGEM NO CHAT
+    // --------------------------------------------------------
+    function adicionarMensagem({ hora, username, color, texto }) {
+      const linha = document.createElement("div");
+      linha.className = "msg-linha";
+
+      linha.innerHTML = `
+      <span class="msg-hora">[${hora}]</span>
+      <span class="msg-nick" style="color:${color}">${escaparHTML(username)}</span>
+      <span class="msg-texto">${escaparHTML(texto)}</span>
+    `;
+
+      mensagensDiv.appendChild(linha);
+      rolarParaBaixo();
+    }
+
+    // --------------------------------------------------------
+    // 5. RENDERIZAR MENSAGEM DE SISTEMA
+    // --------------------------------------------------------
+    function adicionarSistema(texto) {
+      const linha = document.createElement("div");
+      linha.className = "msg-sistema";
+      linha.textContent = texto;
+      mensagensDiv.appendChild(linha);
+      rolarParaBaixo();
+    }
+
+    // --------------------------------------------------------
+    // 6. ATUALIZAR LISTA DE USUÁRIOS NA SIDEBAR
+    // --------------------------------------------------------
+    function atualizarListaUsuarios(usuarios) {
+
+    }
+
+    // --------------------------------------------------------
+    // 7. ENVIAR MENSAGEM
+    // --------------------------------------------------------
+    function enviarMensagem() {
+
+    }
+
+    // --------------------------------------------------------
+    // 8. UTILITÁRIOS
+    // --------------------------------------------------------
+
+    // Rola o chat para a última mensagem
+    function rolarParaBaixo() {
+      mensagensDiv.scrollTop = mensagensDiv.scrollHeight;
+    }
+
+    // Previne XSS escapando HTML
+    function escaparHTML(str) {
+      return str
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+
+    // --------------------------------------------------------
+    // 9. EVENT LISTENERS
+    // --------------------------------------------------------
+
+    // Botão "Entrar na sala"
+    btnEntrar.addEventListener("click", () => {
+      const nick = inputNick.value.trim();
+      if (!nick) {
+        loginErro.textContent = "Digite um nickname para entrar.";
+        return;
+      }
+      meuUsername = nick;
+      loginErro.textContent = "";
+      conectar();
+    });
+
+    // Enter no campo de nick também entra
+    inputNick.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") btnEntrar.click();
+    });
+
+    // Botão "Enviar"
+    btnEnviar.addEventListener("click", enviarMensagem);
+
+    // Enter no campo de mensagem também envia
+    inputMsg.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") enviarMensagem();
+    });
+  </script>
+
+</body>
+
+</html>
