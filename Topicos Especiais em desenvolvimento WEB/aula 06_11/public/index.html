@@ -214,7 +214,16 @@
   // 7. ENVIAR MENSAGEM
   // --------------------------------------------------------
   function enviarMensagem() {
+    const texto = inputMsg.value.trim();
+    if (!texto || !socket || socket.readyState !== WebSocket.OPEN) return;
 
+    socket.send(JSON.stringify({
+      tipo: "mensagem",
+      texto,
+    }));
+
+    inputMsg.value = "";
+    inputMsg.focus();
   }
 
   // --------------------------------------------------------

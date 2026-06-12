@@ -121,6 +121,25 @@ wss.on("connection", (socket) => {
 
       console.log(`[+] ${username} conectado. Total: ${clientes.size}`);
     }
+
+    if (msg.tipo === "mensagem") {
+      const cliente = clientes.get(socket);// verifica se cliente existe (pode ser que não tenha enviado "entrar" ainda)
+      if (!cliente) return;
+
+      const texto = String(msg.texto).trim().slice(0, 500);
+      if (!texto) return;
+      
+      // Envia para todos
+      broadcast({
+        tipo: "mensagem",
+        username: cliente.username,
+        color: cliente.color,
+        texto,
+        hora: new Date().toLocaleTimeString( "pt-BR", { hour: "2-digit", minute: "2-digit" } ),
+      });
+
+      console.log(`[MSG] ${cliente.username}: ${texto}`);
+    }
   });
 
 });
