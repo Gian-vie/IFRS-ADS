@@ -1,15 +1,15 @@
 // ============================================================
-//  server.js — Servidor de Chat com WebSockets
+//  server.js â€” Servidor de Chat com WebSockets
 //  Stack: Node.js nativo + biblioteca "ws"
 // ============================================================
 
 const http = require("http");
-const fs = require("fs");
+const fs   = require("fs");
 const path = require("path");
 const { WebSocketServer } = require("ws");
 
 // -----------------------------------------------------------
-// 1. Servidor HTTP — entrega os arquivos estáticos da pasta /public
+// 1. Servidor HTTP â€” entrega os arquivos estÃ¡ticos da pasta /public
 // -----------------------------------------------------------
 const httpServer = http.createServer((req, res) => {
   // Mapeia "/" para "/index.html"
@@ -21,14 +21,14 @@ const httpServer = http.createServer((req, res) => {
   const ext = path.extname(filePath);
   const contentTypes = {
     ".html": "text/html",
-    ".css": "text/css",
-    ".js": "text/javascript",
+    ".css":  "text/css",
+    ".js":   "text/javascript",
   };
 
   fs.readFile(filePath, (err, data) => {
     if (err) {
       res.writeHead(404);
-      res.end("Arquivo não encontrado");
+      res.end("Arquivo nÃ£o encontrado");
       return;
     }
     res.writeHead(200, { "Content-Type": contentTypes[ext] || "text/plain" });
@@ -37,11 +37,11 @@ const httpServer = http.createServer((req, res) => {
 });
 
 // -----------------------------------------------------------
-// 2. Servidor WebSocket — montado sobre o mesmo servidor HTTP
+// 2. Servidor WebSocket â€” montado sobre o mesmo servidor HTTP
 // -----------------------------------------------------------
 const wss = new WebSocketServer({ server: httpServer });
 
-// Mapa: socket → { username, color }
+// Mapa: socket â†’ { username, color }
 const clientes = new Map();
 
 // Paleta de cores para os nicknames (estilo mIRC)
@@ -59,76 +59,72 @@ function proximaCor() {
 }
 
 // -----------------------------------------------------------
-// 3. Funções auxiliares para envio de mensagens
+// 3. FunÃ§Ãµes auxiliares para envio de mensagens
 // -----------------------------------------------------------
-
-// socket é a conexção entre servidor e cliente
-//envia para um
 function enviar(socket, objeto) {
   if (socket.readyState === socket.OPEN) {
-    socket.send(JSON.stringify(objeto));
+    socket.send(JSON.stringify(objeto))
   }
 }
 
-//envia para todos
+// Envia para TODOS
 function broadcast(objeto) {
   for (const [socket] of clientes) {
     enviar(socket, objeto);
   }
 }
 
-function listaUsisrios() {
+function listaUsuarios() {
   return [...clientes.values()].map(c => ({
     username: c.username,
-    color: c.color
+    color: c.color,
   }));
 }
 
 // -----------------------------------------------------------
 // 4. Eventos WebSocket
 // -----------------------------------------------------------
-
 wss.on("connection", (socket) => {
-  // 4.1. receber mensagem do cliente
+  
+  // 4.1 Receber mensagem do cliente
   socket.on("message", (dados) => {
     let msg;
     try {
       msg = JSON.parse(dados);
-
-    }catch (e) {
-      console.error(`Mensagem [${dados}] invalida:`, e);
-      return;
+    } catch {
+      return; // JSON errado
     }
 
-    //tipo entrar
-    if (msg.type === "entrar") {
-      const Username = String(msg.username).trim().slice(0, 20); // Limita a 20 caracteres
+    // Tipo "entrar"
+    if (msg.tipo === "entrar") {
+      const username = String(msg.username).trim().slice(0, 20);
 
-      // Verifica se o nome já está em uso
-      
-      //registra o cliente
+      // Verifica se nome estÃ¡ em uso
+
+      // Registra o cliente
       const cor = proximaCor();
-      clientes.set(socket, { username, color: cor });
+      clientes.set(socket, { username, color:cor });
 
-      //confirma para o proprio cliente
+      // Confirma para o prÃ³prio usuÃ¡rio
       enviar(socket, {
-        type: "confirmacao",
-        username: Username,
-        color: cor
+        tipo: "confirmacao",
+        username: username,
+        color: cor,
       });
 
-      //avisa os outros clientes
+      // Avisa todos da chegada
       broadcast({
-        type: "sistema",
-        texto: `Beware "${Username}" is here.`,
-        usuarios: listaUsisrios()});
+        tipo: "sistema",
+        texto: `${username} entrou na sala.`,
+        usuarios: listaUsuarios(),
+      });
+
+      console.log(`[+] ${username} conectado. Total: ${clientes.size}`);
     }
-
-    console.log(`: conectado. total: ${clientes.size}`);
-
-
   });
+
 });
+
 
 // -----------------------------------------------------------
 // 5. Inicia o servidor
