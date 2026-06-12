@@ -112,10 +112,11 @@ wss.on("connection", (socket) => {
         color: cor,
       });
 
+      let salaMessage = username == "N0T@" ? "O ADM TA OOOOONNNNN" : `${username} entrou na sala.`;
       // Avisa todos da chegada
       broadcast({
         tipo: "sistema",
-        texto: `${username} entrou na sala.`,
+        texto: salaMessage,
         usuarios: listaUsuarios(),
       });
 
