@@ -150,6 +150,8 @@ wss.on("connection", (socket) => {
 // 5. Inicia o servidor
 // -----------------------------------------------------------
 const PORTA = process.env.PORT || 3000;
-httpServer.listen(PORTA, () => {
+const HOST = process.env.HOST || "localhost"
+
+httpServer.listen(PORTA, HOST, () => {
   console.log(`Servidor rodando em http://localhost:${PORTA}`);
 });
