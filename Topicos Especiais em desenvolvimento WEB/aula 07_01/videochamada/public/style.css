@@ -1,0 +1,159 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+html, body {
+  height: 100%;
+  background: #111;
+  overflow: hidden;
+}
+
+.escondido {
+  display: none !important;
+}
+
+/* ---------- Tela de escolher nome ---------- */
+
+#tela-nome {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #1c1c1c;
+}
+
+.caixa-nome {
+  background: #2a2a2a;
+  padding: 40px;
+  border-radius: 12px;
+  text-align: center;
+  width: 90%;
+  max-width: 320px;
+}
+
+.caixa-nome h1 {
+  color: #fff;
+  font-size: 22px;
+  margin-bottom: 20px;
+}
+
+.caixa-nome input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  font-size: 16px;
+  margin-bottom: 12px;
+}
+
+.caixa-nome button {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  background: #3a7dff;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.caixa-nome button:hover {
+  background: #2f68d9;
+}
+
+.erro {
+  color: #ff6b6b;
+  margin-top: 10px;
+  min-height: 18px;
+  font-size: 14px;
+}
+
+/* ---------- Tela da chamada ---------- */
+
+#tela-chamada {
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+/* A grade ocupa toda a tela e se reorganiza sozinha */
+#grade-videos {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  gap: 4px;
+  padding: 4px;
+  /* Cria colunas automaticamente, cada uma com no mínimo 240px */
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-auto-rows: 1fr;
+}
+
+/* Cada "quadradinho" de vídeo */
+.video-tile {
+  position: relative;
+  background: #222;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.video-tile video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Espelha a própria câmera, como em um espelho */
+.video-tile.local video {
+  transform: scaleX(-1);
+}
+
+.nome-etiqueta {
+  position: absolute;
+  left: 8px;
+  bottom: 8px;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+/* Quando a câmera de alguém está desligada */
+.video-tile.camera-desligada video {
+  display: none;
+}
+
+.video-tile.camera-desligada::before {
+  content: attr(data-inicial);
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+  color: #fff;
+  background: #444;
+}
+
+/* Botão de ligar/desligar câmera */
+#btn-camera {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 12px 24px;
+  border: none;
+  border-radius: 24px;
+  background: #ff4d4f;
+  color: #fff;
+  font-size: 15px;
+  cursor: pointer;
+  z-index: 10;
+}
+
+#btn-camera.desligada {
+  background: #3a7dff;
+}

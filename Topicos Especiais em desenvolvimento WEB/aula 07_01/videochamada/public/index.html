@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Videochamada em Grade</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Tela 1: escolher o nome antes de entrar -->
+  <div id="tela-nome">
+    <div class="caixa-nome">
+      <h1>Entrar na chamada</h1>
+      <input type="text" id="input-nome" placeholder="Digite seu nome" maxlength="20" autofocus>
+      <button id="btn-entrar">Entrar</button>
+      <p id="mensagem-erro" class="erro"></p>
+    </div>
+  </div>
+
+  <!-- Tela 2: a chamada em si, com a grade de vídeos -->
+  <div id="tela-chamada" class="escondido">
+    <div id="grade-videos"></div>
+    <button id="btn-camera">Desligar câmera</button>
+  </div>
+
+  <!-- Biblioteca do Socket.io, servida automaticamente pelo servidor -->
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="client.js"></script>
+</body>
+</html>
