@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🗺️ Radar em Tempo Real</title>
+
+  <!--
+    LEAFLET.JS — Biblioteca de mapas open-source
+    CSS e JS carregados via CDN. Usa tiles do OpenStreetMap:
+    100% gratuito, sem cadastro, sem API key.
+  -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <!--
+    SOCKET.IO (cliente) — Servido automaticamente pelo nosso servidor Node.js.
+    Não precisamos baixar nada; ele fica disponível em /socket.io/socket.io.js.
+  -->
+  <script src="/socket.io/socket.io.js"></script>
+
+  <!-- Estilos do painel do mapa -->
+  <link rel="stylesheet" href="/css/mapa.css" />
+</head>
+<body>
+
+  <header>
+    <h1>📡 Radar em Tempo Real — Web Tópicos Especiais</h1>
+    <div id="contador">● <span id="num-alunos">0</span> aluno(s) conectado(s)</div>
+  </header>
+
+  <!-- O Leaflet renderiza o mapa dentro desta div -->
+  <div id="mapa"></div>
+
+  <!-- Painel lateral flutuante com a lista de alunos -->
+  <div id="painel-lateral">
+    <h2>📍 Alunos no Mapa</h2>
+    <div id="lista-alunos">
+      <p style="color:#6e7681; font-size:0.8rem;">Aguardando conexões...</p>
+    </div>
+  </div>
+
+  <!-- Lógica do mapa e comunicação com o servidor -->
+  <script src="/js/mapa.js"></script>
+
+</body>
+</html>

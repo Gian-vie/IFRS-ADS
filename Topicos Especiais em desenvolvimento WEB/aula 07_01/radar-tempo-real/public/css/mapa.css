@@ -1,0 +1,115 @@
+/* =============================================================================
+   mapa.css — Estilos do painel do mapa (visão projetor/desktop)
+   ============================================================================= */
+
+/* Reset básico: garante que o mapa ocupe toda a tela sem barras de rolagem */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: #0d1117;
+  color: #c9d1d9;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* --- Cabeçalho --- */
+header {
+  background: #161b22;
+  border-bottom: 2px solid #30363d;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0; /* Impede que o header encolha quando o mapa crescer */
+}
+
+header h1 {
+  font-size: 1.3rem;
+  color: #58a6ff;
+  letter-spacing: 1px;
+}
+
+/* Contador de alunos conectados no canto direito do header */
+#contador {
+  background: #21262d;
+  border: 1px solid #30363d;
+  border-radius: 20px;
+  padding: 5px 15px;
+  font-size: 0.9rem;
+  color: #3fb950;
+}
+
+/* --- Mapa --- */
+/* flex: 1 faz o mapa preencher todo o espaço vertical restante após o header */
+#mapa {
+  flex: 1;
+  width: 100%;
+}
+
+/* --- Painel lateral com lista de alunos --- */
+#painel-lateral {
+  position: absolute;
+  top: 70px;
+  right: 15px;
+  z-index: 1000; /* Fica acima das camadas do Leaflet (que usam z-index < 1000) */
+  background: rgba(22, 27, 34, 0.92);
+  border: 1px solid #30363d;
+  border-radius: 10px;
+  padding: 12px;
+  min-width: 180px;
+  max-height: 70vh;
+  overflow-y: auto;
+  backdrop-filter: blur(4px); /* Efeito de vidro fosco sobre o mapa */
+}
+
+#painel-lateral h2 {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #8b949e;
+  margin-bottom: 8px;
+  border-bottom: 1px solid #30363d;
+  padding-bottom: 6px;
+}
+
+/* Cada linha de aluno na lista lateral */
+.aluno-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 0;
+  font-size: 0.9rem;
+  color: #e6edf3;
+  border-bottom: 1px solid #21262d;
+}
+
+.aluno-item:last-child {
+  border-bottom: none;
+}
+
+/* Bolinha de status: verde pulsando = GPS ativo, cinza = sem GPS ainda */
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #3fb950;
+  flex-shrink: 0;
+  animation: pulsar 1.5s infinite;
+}
+
+.status-dot.sem-gps {
+  background: #6e7681;
+  animation: none;
+}
+
+@keyframes pulsar {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.5; transform: scale(0.8); }
+}

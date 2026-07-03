@@ -1,0 +1,180 @@
+/* =============================================================================
+   mobile.css — Estilos da tela do celular do aluno (rastreador GPS)
+   ============================================================================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: #0d1117;
+  color: #e6edf3;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* Card central que contém as duas telas (registro e transmissão) */
+.card {
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 16px;
+  padding: 30px 24px;
+  width: 100%;
+  max-width: 380px;
+  text-align: center;
+}
+
+.emoji-header {
+  font-size: 3rem;
+  margin-bottom: 10px;
+}
+
+h1 {
+  font-size: 1.4rem;
+  color: #58a6ff;
+  margin-bottom: 6px;
+}
+
+.subtitulo {
+  font-size: 0.85rem;
+  color: #8b949e;
+  margin-bottom: 24px;
+}
+
+/* =============================================================================
+   TELA 1 — Registro (campo de nome)
+   ============================================================================= */
+
+#tela-registro input {
+  width: 100%;
+  padding: 14px;
+  background: #0d1117;
+  border: 1px solid #30363d;
+  border-radius: 10px;
+  color: #e6edf3;
+  font-size: 1.1rem;
+  text-align: center;
+  outline: none;
+  margin-bottom: 16px;
+  /* Transição suave da borda ao focar no campo */
+  transition: border-color 0.2s;
+}
+
+#tela-registro input:focus {
+  border-color: #58a6ff;
+}
+
+#btn-iniciar {
+  width: 100%;
+  padding: 14px;
+  background: #238636;
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+#btn-iniciar:hover    { background: #2ea043; }
+#btn-iniciar:disabled { background: #3d444d; cursor: not-allowed; }
+
+/* Caixa de erro exibida quando o GPS falha ou nome está em branco */
+#msg-erro {
+  display: none; /* Ocultada por padrão; JS muda para "block" quando necessário */
+  background: #2d0e0e;
+  border: 1px solid #f85149;
+  border-radius: 10px;
+  padding: 12px;
+  color: #f85149;
+  font-size: 0.85rem;
+  margin-top: 12px;
+  text-align: left;
+}
+
+/* =============================================================================
+   TELA 2 — Transmissão ativa
+   ============================================================================= */
+
+/* Oculta por padrão; JS troca display para "block" após iniciar o GPS */
+#tela-transmitindo {
+  display: none;
+}
+
+/* Badge verde animado que indica transmissão ao vivo */
+.transmitindo-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #0f2a1a;
+  border: 1px solid #3fb950;
+  border-radius: 20px;
+  padding: 8px 16px;
+  color: #3fb950;
+  font-size: 0.9rem;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+/* Bolinha pulsante dentro do badge de transmissão */
+.dot-animado {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #3fb950;
+  animation: pulsar 1.2s infinite;
+}
+
+@keyframes pulsar {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.3; transform: scale(0.7); }
+}
+
+/* Caixa escura que exibe os dados do GPS em tempo real */
+.status-box {
+  background: #0d1117;
+  border: 1px solid #30363d;
+  border-radius: 10px;
+  padding: 16px;
+  margin: 16px 0;
+  font-size: 0.9rem;
+  text-align: left;
+}
+
+/* Cada linha de dado (ex: "Latitude: -29.1234") */
+.status-linha {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 0;
+  border-bottom: 1px solid #21262d;
+}
+
+.status-linha:last-child { border-bottom: none; }
+
+.label { color: #8b949e; }
+.valor { color: #e6edf3; font-weight: bold; }
+
+/* Botão para encerrar a transmissão */
+#btn-parar {
+  width: 100%;
+  padding: 12px;
+  background: #da3633;
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 16px;
+  transition: background 0.2s;
+}
+
+#btn-parar:hover { background: #f85149; }
