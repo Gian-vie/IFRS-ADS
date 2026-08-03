@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <!--
+    maximum-scale=1 evita o zoom automático em campos de input no iOS,
+    garantindo uma experiência de formulário mais confortável no celular.
+  -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>📱 Radar — Celular do Aluno</title>
+
+  <!-- Socket.io cliente — servido automaticamente pelo servidor Node.js -->
+  <script src="/socket.io/socket.io.js"></script>
+
+  <!-- Estilos da tela mobile -->
+  <link rel="stylesheet" href="/css/mobile.css" />
+</head>
+<body>
+
+  <div class="card">
+    <div class="emoji-header">📡</div>
+    <h1>Radar em Tempo Real</h1>
+    <p class="subtitulo">Tópicos Especiais em Web — IFRS</p>
+
+    <!--
+      TELA 1: Registro
+      Exibida inicialmente. O aluno digita o nome e clica em Iniciar.
+      O JS troca para a Tela 2 após o GPS ser ativado com sucesso.
+    -->
+    <div id="tela-registro">
+      <input
+        type="text"
+        id="input-nome"
+        placeholder="Digite seu nome..."
+        maxlength="30"
+        autocomplete="off"
+      />
+      <button id="btn-iniciar">🚀 Iniciar Transmissão</button>
+      <div id="msg-erro"></div>
+    </div>
+
+    <!--
+      TELA 2: Transmissão ativa
+      Oculta por padrão (display: none no CSS).
+      Exibida pelo JS assim que o GPS começa a retornar posições.
+    -->
+    <div id="tela-transmitindo">
+      <div class="transmitindo-badge">
+        <div class="dot-animado"></div>
+        Transmitindo ao vivo
+      </div>
+
+      <div class="status-box">
+        <div class="status-linha">
+          <span class="label">👤 Aluno:</span>
+          <span class="valor" id="display-nome">—</span>
+        </div>
+        <div class="status-linha">
+          <span class="label">📍 Latitude:</span>
+          <span class="valor" id="display-lat">Aguardando...</span>
+        </div>
+        <div class="status-linha">
+          <span class="label">📍 Longitude:</span>
+          <span class="valor" id="display-lng">Aguardando...</span>
+        </div>
+        <div class="status-linha">
+          <span class="label">🎯 Precisão:</span>
+          <span class="valor" id="display-precisao">—</span>
+        </div>
+        <div class="status-linha">
+          <span class="label">🔄 Atualizações:</span>
+          <span class="valor" id="display-updates">0</span>
+        </div>
+      </div>
+
+      <button id="btn-parar">⏹️ Parar Transmissão</button>
+    </div>
+  </div>
+
+  <!-- Lógica do GPS e comunicação com o servidor -->
+  <script src="/js/mobile.js"></script>
+
+</body>
+</html>
