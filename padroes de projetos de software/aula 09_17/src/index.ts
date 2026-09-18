@@ -1,74 +1,115 @@
-interface Botao {renderizar(): void}
-interface Checkbox {marcar(): void}
+// --- Interfaces dos Produtos ---
+interface ProdutoPrincipal {
+    preparar(): string;
+}
 
+interface Bebida {
+    servir(): string;
+}
 
+interface Sobremesa {
+    preparar(): string;
+}
 
-class CheckboxWindows implements Checkbox {
-    marcar(): void {
-        console.log('marcando checkbox estilo windows')
+// --- Produtos da Família Hamburgueria ---
+class Hamburguer implements ProdutoPrincipal {
+    public preparar(): string {
+        return "[Hamburgueria] Preparando o hambúrguer na chapa.";
     }
 }
 
-class BotaoWindows implements Botao {
-    renderizar(): void {
-        console.log('renderizando botão estilo windows')
+class Refrigerante implements Bebida {
+    public servir(): string {
+        return "[Hamburgueria] Servindo refrigerante no copo.";
     }
 }
 
-class CheckboxMac implements Checkbox {
-    marcar(): void {
-        console.log('marcando checkbox estilo mac')
+class SobremesaHamburgueria implements Sobremesa {
+    public preparar(): string {
+        return "[Hamburgueria] Preparando sundae.";
     }
 }
 
-class BotaoMac implements Botao {
-    renderizar(): void {
-        console.log('renderizando botão estilo mac')
+// --- Produtos da Família Pizzaria ---
+class Pizza implements ProdutoPrincipal {
+    public preparar(): string {
+        return "[Pizzaria] Assando a pizza no forno a lenha.";
     }
 }
 
-interface GUIFactory {
-    criarBotão(): Botao;
-    CriarCheckbox(): Checkbox;
-}
-
-class GUIFactoryWindows implements GUIFactory {
-    criarBotão(): Botao {
-        return new BotaoWindows()
-    }
-    CriarCheckbox(): Checkbox {
-        return new CheckboxWindows()
+class RefrigerantePizzaria implements Bebida {
+    public servir(): string {
+        return "[Pizzaria] Servindo refrigerante na jarra.";
     }
 }
 
-class GUIFactoryMac implements GUIFactory {
-    criarBotão(): Botao {
-        return new BotaoMac()
-    }
-    CriarCheckbox(): Checkbox {
-        return new CheckboxMac()
+class SobremesaPizzaria implements Sobremesa {
+    public preparar(): string {
+        return "[Pizzaria] Preparando pizza doce.";
     }
 }
 
-class Aplicacao {
-
-    private botao: Botao
-    private checkbox: Checkbox
-    constructor ( factory: GUIFactory){
-        this.botao = factory.criarBotão()
-        this.checkbox = factory.CriarCheckbox()
-    }
-
-    desenharTela(): void {
-        this.botao.renderizar()
-        this.checkbox.marcar()    
-    }
-
+// --- Interface da Abstract Factory ---
+interface RestauranteFactory {
+    criarProdutoPrincipal(): ProdutoPrincipal;
+    criarBebida(): Bebida;
+    criarSobremesa(): Sobremesa;
 }
 
-const SO: string = 'MAC'
-let factory:GUIFactory
-factory = SO === "MAC" ? new GUIFactoryMac() : new GUIFactoryWindows()
+// --- Fábricas Concretas ---
+class HamburgueriaFactory implements RestauranteFactory {
+    public criarProdutoPrincipal(): ProdutoPrincipal {
+        return new Hamburguer();
+    }
+    public criarBebida(): Bebida {
+        return new Refrigerante();
+    }
+    public criarSobremesa(): Sobremesa {
+        return new SobremesaHamburgueria();
+    }
+}
 
-const app = new Aplicacao(factory)
-app.desenharTela()
+class PizzariaFactory implements RestauranteFactory {
+    public criarProdutoPrincipal(): ProdutoPrincipal {
+        return new Pizza();
+    }
+    public criarBebida(): Bebida {
+        return new RefrigerantePizzaria();
+    }
+    public criarSobremesa(): Sobremesa {
+        return new SobremesaPizzaria();
+    }
+}
+
+// --- Classe Cliente (Pedido) ---
+class Pedido {
+    // Propriedades privadas e de leitura garantem confidencialidade e integridade
+    private readonly produtoPrincipal: ProdutoPrincipal;
+    private readonly bebida: Bebida;
+    private readonly sobremesa: Sobremesa;
+
+    constructor(factory: RestauranteFactory) {
+        this.produtoPrincipal = factory.criarProdutoPrincipal();
+        this.bebida = factory.criarBebida();
+        this.sobremesa = factory.criarSobremesa();
+    }
+
+    public montar(): void {
+        console.log("Iniciando montagem do pedido...");
+        console.log(this.produtoPrincipal.preparar());
+        console.log(this.bebida.servir());
+        console.log(this.sobremesa.preparar());
+        console.log("Pedido finalizado com sucesso.\n");
+    }
+}
+
+// --- Execução Principal ---
+console.log("--- Pedido 1: Hamburgueria ---");
+const factoryHamburgueria: RestauranteFactory = new HamburgueriaFactory();
+const pedido1 = new Pedido(factoryHamburgueria);
+pedido1.montar();
+
+console.log("--- Pedido 2: Pizzaria ---");
+const factoryPizzaria: RestauranteFactory = new PizzariaFactory();
+const pedido2 = new Pedido(factoryPizzaria);
+pedido2.montar();
